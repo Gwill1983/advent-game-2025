@@ -1,0 +1,295 @@
+/* ===============================
+   🎄 GLOBAL PREMIUM STYLING
+   =============================== */
+:root {
+  --gold: #ffca3a;
+  --deep-gold: #d4a017;
+  --white: #f8f9fa;
+  --navy: #0b132b;
+  --midnight: #152238;
+  --text: #e0e0e0;
+  --accent: #ff758f;
+  --shadow: rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  margin-left: 240px; /* space for sidebar */
+  background: radial-gradient(circle at 30% 20%, var(--midnight), #000814 80%);
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+  transition: background 0.3s ease;
+}
+
+/* ===============================
+   🧭 SIDEBAR NAVIGATION
+   =============================== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100%;
+  background: rgba(10, 20, 40, 0.85);
+  backdrop-filter: blur(8px);
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 4px 0 20px var(--shadow);
+  z-index: 100;
+}
+
+.sidebar .logo {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(255, 202, 58, 0.6);
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.sidebar ul li {
+  width: 100%;
+}
+
+.sidebar ul li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  padding-left: 30px;
+}
+
+.sidebar ul li a.active {
+  background: linear-gradient(90deg, var(--gold), #fff);
+  color: #000;
+  font-weight: 600;
+  border-radius: 0 10px 10px 0;
+  box-shadow: inset 3px 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+    align-items: center;
+  }
+  .sidebar .logo {
+    display: none;
+  }
+  .sidebar ul li a {
+    justify-content: center;
+    padding: 14px 10px;
+    font-size: 1.2rem;
+  }
+  body {
+    margin-left: 60px;
+  }
+}
+
+/* ===============================
+   🌟 HERO SECTION
+   =============================== */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  text-align: center;
+  position: relative;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  background: linear-gradient(90deg, var(--gold), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+  animation: fadeIn 1.5s ease forwards;
+  opacity: 0;
+}
+
+.hero img {
+  width: min(300px, 60%);
+  margin: 40px 0;
+  animation: float 4s ease-in-out infinite, fadeIn 1.5s ease 0.4s forwards;
+  opacity: 0;
+  filter: drop-shadow(0 0 25px rgba(255,255,255,0.2));
+}
+
+.hero p {
+  font-weight: 300;
+  font-size: 1.1rem;
+  opacity: 0;
+  animation: fadeIn 1.5s ease 0.8s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; transform: none; }
+}
+@keyframes float {
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+}
+
+/* ===============================
+   📆 CALENDAR
+   =============================== */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto 100px;
+  padding: 0 30px;
+}
+
+.door {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  color: var(--white);
+  text-align: center;
+  font-size: 1.8rem;
+  padding: 25px 0;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.door:hover {
+  transform: scale(1.05);
+  border-color: var(--gold);
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 0 20px rgba(255,255,255,0.25);
+}
+
+.door::before {
+  content: "";
+  position: absolute;
+  top: -100%; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.25), transparent);
+  transition: 0.4s ease;
+}
+.door:hover::before { top: 0; }
+
+/* ===============================
+   🧩 CASE FILE PAGE
+   =============================== */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(90deg, var(--gold), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin: 40px 0 20px;
+}
+
+p {
+  font-size: 1rem;
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 40px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.05);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 12px;
+  text-align: center;
+}
+
+th {
+  background: rgba(255,255,255,0.1);
+  font-size: 1.1rem;
+}
+
+td {
+  background: rgba(255,255,255,0.03);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+td:hover {
+  background: rgba(255,255,255,0.1);
+  transform: scale(1.03);
+}
+
+td.crossed {
+  text-decoration: line-through;
+  color: red;
+  opacity: 0.6;
+  background: rgba(255, 0, 0, 0.1);
+}
+
+/* ===============================
+   ❄️ FOOTER + SNOW
+   =============================== */
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+
+.snowflake {
+  position: fixed;
+  top: 0;
+  color: #fff;
+  user-select: none;
+  z-index: 1000;
+  animation: fall linear infinite;
+  pointer-events: none;
+}
+@keyframes fall {
+  0% { transform: translateY(-10px) rotate(0deg); }
+  100% { transform: translateY(100vh) rotate(360deg); }
+}
