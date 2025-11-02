@@ -1,71 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Advent Game</title>
-    <style>
-        body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background-color: #f5f5f5;
-            background-image: radial-gradient(circle at top left, #ffefef, #ffecec, #fff);
-            text-align: center;
-            padding: 50px;
-        }
-        h1 {
-            color: darkred;
-            text-shadow: 1px 1px #fff;
-        }
-        .calendar {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 15px;
-            max-width: 600px;
-            margin: 40px auto;
-        }
-        .door {
-            background: #d62828;
-            color: white;
-            font-size: 24px;
-            padding: 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-        .door:hover {
-            background: #e63946;
-            transform: scale(1.1);
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Advent Game</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&display=swap" rel="stylesheet">
+
+<style>
+  /* ===== Base ===== */
+  body {
+    margin: 0;
+    font-family: 'Mountains of Christmas', cursive;
+    color: #fff;
+    background: linear-gradient(180deg, #1b2735 0%, #090a0f 100%);
+    overflow-x: hidden;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-top: 40px;
+    text-shadow: 2px 2px 8px #000;
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+  }
+
+  /* ===== Calendar Grid ===== */
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 15px;
+    max-width: 700px;
+    margin: 0 auto 80px auto;
+    padding: 0 20px;
+  }
+
+  .door {
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 25px 0;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+
+  .door:hover {
+    background: #e63946;
+    transform: scale(1.08) rotate(-2deg);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  }
+
+  /* ===== Snow animation ===== */
+  .snowflake {
+    position: fixed;
+    top: 0;
+    color: #fff;
+    user-select: none;
+    z-index: 1000;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-10px) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
+  }
+</style>
 </head>
+
 <body>
-    <h1>🎄 Welcome to The Advent Game 🎅</h1>
-    <p>Click the numbers to open each day's surprise!</p>
-    <div class="calendar">
-        <a href="day1.html" class="door">1</a>
-        <a href="#" class="door">2</a>
-        <a href="#" class="door">3</a>
-        <a href="#" class="door">4</a>
-        <a href="#" class="door">5</a>
-        <a href="#" class="door">6</a>
-        <a href="#" class="door">7</a>
-        <a href="#" class="door">8</a>
-        <a href="#" class="door">9</a>
-        <a href="#" class="door">10</a>
-        <a href="#" class="door">11</a>
-        <a href="#" class="door">12</a>
-        <a href="#" class="door">13</a>
-        <a href="#" class="door">14</a>
-        <a href="#" class="door">15</a>
-        <a href="#" class="door">16</a>
-        <a href="#" class="door">17</a>
-        <a href="#" class="door">18</a>
-        <a href="#" class="door">19</a>
-        <a href="#" class="door">20</a>
-        <a href="#" class="door">21</a>
-        <a href="#" class="door">22</a>
-        <a href="#" class="door">23</a>
-        <a href="#" class="door">24</a>
-    </div>
+  <h1>🎄 The Advent Game 🎅</h1>
+  <p>Come back each day to open your festive challenge!</p>
+
+  <div class="calendar">
+    <a href="day1.html" class="door">1</a>
+    <a href="#" class="door">2</a>
+    <a href="#" class="door">3</a>
+    <a href="#" class="door">4</a>
+    <a href="#" class="door">5</a>
+    <a href="#" class="door">6</a>
+    <a href="#" class="door">7</a>
+    <a href="#" class="door">8</a>
+    <a href="#" class="door">9</a>
+    <a href="#" class="door">10</a>
+    <a href="#" class="door">11</a>
+    <a href="#" class="door">12</a>
+    <a href="#" class="door">13</a>
+    <a href="#" class="door">14</a>
+    <a href="#" class="door">15</a>
+    <a href="#" class="door">16</a>
+    <a href="#" class="door">17</a>
+    <a href="#" class="door">18</a>
+    <a href="#" class="door">19</a>
+    <a href="#" class="door">20</a>
+    <a href="#" class="door">21</a>
+    <a href="#" class="door">22</a>
+    <a href="#" class="door">23</a>
+    <a href="#" class="door">24</a>
+  </div>
+
+  <!-- snow generator -->
+  <script>
+    const snowCount = 40;
+    for (let i = 0; i < snowCount; i++) {
+      const snow = document.createElement('div');
+      snow.classList.add('snowflake');
+      snow.innerHTML = '❄';
+      snow.style.left = Math.random() * 100 + 'vw';
+      snow.style.fontSize = Math.random() * 20 + 10 + 'px';
+      snow.style.animationDuration = Math.random() * 5 + 5 + 's';
+      snow.style.opacity = Math.random();
+      document.body.appendChild(snow);
+    }
+  </script>
 </body>
 </html>
