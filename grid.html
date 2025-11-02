@@ -1,1 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case File - The Christmas Complaint</title>
+
+<!-- Shared style -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    background: radial-gradient(circle at 30% 20%, #152238, #000814 80%);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-top: 40px;
+    background: linear-gradient(90deg, #ffca3a, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .grid-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px auto;
+    max-width: 900px;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  th, td {
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 10px;
+    text-align: center;
+  }
+
+  th {
+    background: rgba(255,255,255,0.1);
+    font-size: 1.2rem;
+  }
+
+  td {
+    background: rgba(255,255,255,0.05);
+    transition: background 0.3s ease;
+  }
+
+  td.crossed {
+    text-decoration: line-through;
+    color: red;
+    opacity: 0.6;
+    background: rgba(255, 0, 0, 0.1);
+  }
+
+  a {
+    color: #ffca3a;
+    text-decoration: none;
+  }
+
+  footer {
+    opacity: 0.6;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+  <h1>The Christmas Complaint Case File</h1>
+  <p>Each solved clue eliminates a suspect, gift, or location. Your goal: find who complained, what gift they received, and where they are!</p>
+
+  <div class="grid-section">
+    <h2>🎅 Suspects</h2>
+    <table id="suspects">
+      <tr><td data-name="Clara Claus">Clara Claus</td><td data-name="Frosty McSnow">Frosty McSnow</td><td data-name="Holly Berry">Holly Berry</td></tr>
+      <tr><td data-name="Chris Pine">Chris Pine</td><td data-name="Rudy Deer">Rudy Deer</td><td data-name="Eve Star">Eve Star</td></tr>
+      <tr><td data-name="Tinsel Twigg">Tinsel Twigg</td><td data-name="Noel Frost">Noel Frost</td><td data-name="Ivy Spark">Ivy Spark</td></tr>
+    </table>
+
+    <h2>🎁 Gifts</h2>
+    <table id="gifts">
+      <tr><td data-name="Socks">Socks</td><td data-name="Drone">Drone</td><td data-name="Book">Book</td></tr>
+      <tr><td data-name="Candle">Candle</td><td data-name="Sweater">Sweater</td><td data-name="Board Game">Board Game</td></tr>
+      <tr><td data-name="Chocolates">Chocolates</td><td data-name="Toy Train">Toy Train</td><td data-name="Slippers">Slippers</td></tr>
+    </table>
+
+    <h2>🌍 Locations</h2>
+    <table id="places">
+      <tr><td data-name="Lapland">Lapland</td><td data-name="Sydney">Sydney</td><td data-name="New York">New York</td></tr>
+      <tr><td data-name="Tokyo">Tokyo</td><td data-name="London">London</td><td data-name="Rio">Rio</td></tr>
+      <tr><td data-name="Paris">Paris</td><td data-name="Cape Town">Cape Town</td><td data-name="Toronto">Toronto</td></tr>
+    </table>
+  </div>
+
+  <footer>
+    <p><a href="index.html">⬅ Return to Calendar</a></p>
+  </footer>
+
+  <script>
+    // Load progress from localStorage and mark crossed-out items
+    window.addEventListener('load', () => {
+      const progress = JSON.parse(localStorage.getItem('progress')) || {};
+      for (let category in progress) {
+        progress[category].forEach(item => {
+          const cell = document.querySelector(`[data-name="${item}"]`);
+          if (cell) cell.classList.add('crossed');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
 
