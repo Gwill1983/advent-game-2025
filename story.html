@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Story - Advent Game</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Story – Advent Game</title>
 
-  <!-- Google Fonts + Shared Styles -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&family=Homemade+Apple&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&family=Homemade+Apple&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -26,8 +25,8 @@
     <section>
       <h2>🎅 The Situation</h2>
       <p>
-        It all began one frosty morning when Santa received a mysterious letter of complaint. 
-        The writer claimed their Christmas gift quality had dropped significantly — but they didn’t sign their name. 
+        It all began one frosty morning when Santa received a mysterious letter of complaint.
+        The writer claimed their Christmas gift quality had dropped significantly — but they didn’t sign their name.
         Shocked and worried, Santa called upon his most trusted investigator: <strong>you</strong>.
       </p>
     </section>
@@ -47,7 +46,7 @@
           say it didn’t taste like magic!
         </p>
         <p>
-          Sincerely,<br>
+          Sincerely,<br />
           <em>An Anonymous Elf</em>
         </p>
         <button id="closeLetterBtn">Close Letter</button>
@@ -57,22 +56,22 @@
     <section>
       <h2>🕵️ Your Mission</h2>
       <p>Your task is to uncover three things before Christmas Eve:</p>
-      <ul style="list-style-type: none; padding: 0;">
+      <ul style="list-style-type:none;padding:0;">
         <li>🎁 <strong>Who</strong> sent the letter</li>
         <li>🎁 <strong>What</strong> gift they received</li>
         <li>🎁 <strong>Where</strong> they are in the world</li>
       </ul>
       <p>
-        Each day, a new riddle will reveal a clue — follow it, solve it, and piece together the truth. 
-        Your findings will update automatically in your 
-        <a href="grid.html" style="color: var(--gold); font-weight: 600;">Case File</a>.
+        Each day, a new riddle will reveal a clue — follow it, solve it, and piece together the truth.
+        Your findings will update automatically in your
+        <a href="grid.html" style="color:var(--gold);font-weight:600;">Case File</a>.
       </p>
     </section>
 
     <section>
       <h2>🌟 The Final Puzzle</h2>
       <p>
-        On December 24th, your final challenge will arrive. 
+        On December 24th, your final challenge will arrive.
         Using all the evidence you’ve gathered, you’ll identify the true sender and save Christmas from scandal!
       </p>
     </section>
@@ -81,16 +80,15 @@
   <footer>© 2025 The Advent Game — Story by Santa’s Secret Services</footer>
 
   <script>
-    const readLetterBtn = document.getElementById('readLetterBtn');
-    const letterOverlay = document.getElementById('letterOverlay');
-    const closeLetterBtn = document.getElementById('closeLetterBtn');
+    const readLetterBtn = document.getElementById("readLetterBtn");
+    const letterOverlay = document.getElementById("letterOverlay");
+    const closeLetterBtn = document.getElementById("closeLetterBtn");
 
-    readLetterBtn.addEventListener('click', () => {
-      letterOverlay.style.display = 'flex';
+    readLetterBtn.addEventListener("click", () => {
+      letterOverlay.style.display = "flex";
     });
-
-    closeLetterBtn.addEventListener('click', () => {
-      letterOverlay.style.display = 'none';
+    closeLetterBtn.addEventListener("click", () => {
+      letterOverlay.style.display = "none";
     });
   </script>
 </body>
