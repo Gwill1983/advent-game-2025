@@ -72,5 +72,19 @@
   </main>
 
   <footer>© 2025 The Advent Game — Story by Santa’s Secret Services</footer>
+  <script>
+  const openBtn = document.getElementById('openLetter');
+  const envelope = document.getElementById('envelope');
+  const letter = document.getElementById('letterContent');
+
+  openBtn.addEventListener('click', () => {
+    envelope.classList.add('open');
+    setTimeout(() => {
+      letter.classList.add('show');
+    }, 800); // Wait for flap animation
+    openBtn.style.display = 'none';
+  });
+</script>
+
 </body>
 </html>
