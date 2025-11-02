@@ -5,23 +5,116 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Case File - The Christmas Complaint</title>
 
-<!-- Shared style -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
 <style>
-  body {
+  :root {
+    --gold: #ffca3a;
+    --white: #f8f9fa;
+  }
+
+  /* ==== Sidebar Navigation ==== */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100%;
+    background: rgba(10, 20, 40, 0.85);
+    backdrop-filter: blur(8px);
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+    z-index: 100;
+  }
+
+  .sidebar .logo {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+  }
+
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
     margin: 0;
+    width: 100%;
+  }
+
+  .sidebar ul li {
+    width: 100%;
+  }
+
+  .sidebar ul li a {
+    display: block;
+    padding: 14px 24px;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar ul li a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    padding-left: 30px;
+  }
+
+  .sidebar ul li a.active {
+    background: linear-gradient(90deg, var(--gold), #ffffff);
+    color: #000;
+    font-weight: 600;
+    border-radius: 0 10px 10px 0;
+  }
+
+  /* Adjust main content */
+  body {
+    margin-left: 240px;
     background: radial-gradient(circle at 30% 20%, #152238, #000814 80%);
-    color: #fff;
+    color: var(--white);
     font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    margin-top: 0;
     text-align: center;
   }
 
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 60px;
+      align-items: center;
+    }
+    .sidebar .logo {
+      display: none;
+    }
+    .sidebar ul li a {
+      text-align: center;
+      padding: 14px 10px;
+      font-size: 1.2rem;
+    }
+    body {
+      margin-left: 60px;
+    }
+  }
+
+  /* ==== Page Content ==== */
   h1 {
+    font-family: 'Playfair Display', serif;
     font-size: 2.5rem;
     margin-top: 40px;
-    background: linear-gradient(90deg, #ffca3a, #ffffff);
+    background: linear-gradient(90deg, var(--gold), #ffffff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  p {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 30px;
   }
 
   .grid-section {
@@ -61,46 +154,55 @@
     background: rgba(255, 0, 0, 0.1);
   }
 
-  a {
-    color: #ffca3a;
-    text-decoration: none;
-  }
-
   footer {
     opacity: 0.6;
     margin-bottom: 20px;
   }
 </style>
 </head>
+
 <body>
-  <h1>The Christmas Complaint Case File</h1>
-  <p>Each solved clue eliminates a suspect, gift, or location. Your goal: find who complained, what gift they received, and where they are!</p>
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <div class="logo">🎄 Advent Game</div>
+    <ul>
+      <li><a href="index.html">🏠 Calendar</a></li>
+      <li><a href="grid.html" class="active">🕵️ Case File</a></li>
+      <li><a href="#">📜 Story</a></li>
+      <li><a href="#">❓ Help</a></li>
+    </ul>
+  </nav>
 
-  <div class="grid-section">
-    <h2>🎅 Suspects</h2>
-    <table id="suspects">
-      <tr><td data-name="Clara Claus">Clara Claus</td><td data-name="Frosty McSnow">Frosty McSnow</td><td data-name="Holly Berry">Holly Berry</td></tr>
-      <tr><td data-name="Chris Pine">Chris Pine</td><td data-name="Rudy Deer">Rudy Deer</td><td data-name="Eve Star">Eve Star</td></tr>
-      <tr><td data-name="Tinsel Twigg">Tinsel Twigg</td><td data-name="Noel Frost">Noel Frost</td><td data-name="Ivy Spark">Ivy Spark</td></tr>
-    </table>
+  <main>
+    <h1>The Christmas Complaint Case File</h1>
+    <p>Each solved clue eliminates a suspect, gift, or location. Your goal: find who complained, what gift they received, and where they are!</p>
 
-    <h2>🎁 Gifts</h2>
-    <table id="gifts">
-      <tr><td data-name="Socks">Socks</td><td data-name="Drone">Drone</td><td data-name="Book">Book</td></tr>
-      <tr><td data-name="Candle">Candle</td><td data-name="Sweater">Sweater</td><td data-name="Board Game">Board Game</td></tr>
-      <tr><td data-name="Chocolates">Chocolates</td><td data-name="Toy Train">Toy Train</td><td data-name="Slippers">Slippers</td></tr>
-    </table>
+    <div class="grid-section">
+      <h2>🎅 Suspects</h2>
+      <table id="suspects">
+        <tr><td data-name="Clara Claus">Clara Claus</td><td data-name="Frosty McSnow">Frosty McSnow</td><td data-name="Holly Berry">Holly Berry</td></tr>
+        <tr><td data-name="Chris Pine">Chris Pine</td><td data-name="Rudy Deer">Rudy Deer</td><td data-name="Eve Star">Eve Star</td></tr>
+        <tr><td data-name="Tinsel Twigg">Tinsel Twigg</td><td data-name="Noel Frost">Noel Frost</td><td data-name="Ivy Spark">Ivy Spark</td></tr>
+      </table>
 
-    <h2>🌍 Locations</h2>
-    <table id="places">
-      <tr><td data-name="Lapland">Lapland</td><td data-name="Sydney">Sydney</td><td data-name="New York">New York</td></tr>
-      <tr><td data-name="Tokyo">Tokyo</td><td data-name="London">London</td><td data-name="Rio">Rio</td></tr>
-      <tr><td data-name="Paris">Paris</td><td data-name="Cape Town">Cape Town</td><td data-name="Toronto">Toronto</td></tr>
-    </table>
-  </div>
+      <h2>🎁 Gifts</h2>
+      <table id="gifts">
+        <tr><td data-name="Socks">Socks</td><td data-name="Drone">Drone</td><td data-name="Book">Book</td></tr>
+        <tr><td data-name="Candle">Candle</td><td data-name="Sweater">Sweater</td><td data-name="Board Game">Board Game</td></tr>
+        <tr><td data-name="Chocolates">Chocolates</td><td data-name="Toy Train">Toy Train</td><td data-name="Slippers">Slippers</td></tr>
+      </table>
+
+      <h2>🌍 Locations</h2>
+      <table id="places">
+        <tr><td data-name="Lapland">Lapland</td><td data-name="Sydney">Sydney</td><td data-name="New York">New York</td></tr>
+        <tr><td data-name="Tokyo">Tokyo</td><td data-name="London">London</td><td data-name="Rio">Rio</td></tr>
+        <tr><td data-name="Paris">Paris</td><td data-name="Cape Town">Cape Town</td><td data-name="Toronto">Toronto</td></tr>
+      </table>
+    </div>
+  </main>
 
   <footer>
-    <p><a href="index.html">⬅ Return to Calendar</a></p>
+    <p>© 2025 The Advent Game — Case Progress</p>
   </footer>
 
   <script>
@@ -117,4 +219,3 @@
   </script>
 </body>
 </html>
-
