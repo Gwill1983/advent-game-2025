@@ -1,219 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The Advent Game</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Advent Game</title>
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
-<style>
-  :root {
-    --accent: #e63946;
-    --gold: #ffca3a;
-    --dark: #0b0c10;
-    --navy: #1b263b;
-    --white: #f8f9fa;
-  }
-
-  /* ==== Sidebar Navigation ==== */
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 240px;
-    height: 100%;
-    background: rgba(10, 20, 40, 0.85);
-    backdrop-filter: blur(8px);
-    padding-top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    transition: all 0.3s ease;
-    z-index: 100;
-  }
-
-  .sidebar .logo {
-    color: var(--gold);
-    font-weight: 700;
-    font-size: 1.4rem;
-    text-align: center;
-    width: 100%;
-    margin-bottom: 30px;
-    letter-spacing: 1px;
-  }
-
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-  }
-
-  .sidebar ul li {
-    width: 100%;
-  }
-
-  .sidebar ul li a {
-    display: block;
-    padding: 14px 24px;
-    color: var(--white);
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-  }
-
-  .sidebar ul li a:hover {
-    background: rgba(255, 255, 255, 0.1);
-    padding-left: 30px;
-  }
-
-  .sidebar ul li a.active {
-    background: linear-gradient(90deg, var(--gold), #ffffff);
-    color: #000;
-    font-weight: 600;
-    border-radius: 0 10px 10px 0;
-  }
-
-  /* Adjust main content so it’s not hidden behind sidebar */
-  body {
-    margin-left: 240px;
-    background: radial-gradient(circle at 30% 20%, #152238, #000814 80%);
-    color: var(--white);
-    font-family: 'Poppins', sans-serif;
-    overflow-x: hidden;
-    margin-top: 0;
-  }
-
-  @media (max-width: 768px) {
-    .sidebar {
-      width: 60px;
-      align-items: center;
-    }
-    .sidebar .logo {
-      display: none;
-    }
-    .sidebar ul li a {
-      text-align: center;
-      padding: 14px 10px;
-      font-size: 1.2rem;
-    }
-    body {
-      margin-left: 60px;
-    }
-  }
-
-  /* ==== Hero Section ==== */
-  .hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 90vh;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 8vw, 5rem);
-    letter-spacing: 3px;
-    background: linear-gradient(90deg, var(--gold), #fff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 10px;
-    animation: fadeIn 2s ease forwards;
-    opacity: 0;
-  }
-
-  .hero img {
-    width: min(300px, 60%);
-    margin: 40px 0;
-    animation: float 4s ease-in-out infinite, fadeIn 2s ease 0.4s forwards;
-    opacity: 0;
-    filter: drop-shadow(0 0 25px rgba(255,255,255,0.2));
-  }
-
-  .hero p {
-    font-weight: 300;
-    font-size: 1.2rem;
-    opacity: 0;
-    animation: fadeIn 2s ease 0.8s forwards;
-  }
-
-  @keyframes fadeIn {
-    to { opacity: 1; transform: none; }
-  }
-  @keyframes float {
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-10px);}
-  }
-
-  /* ==== Calendar ==== */
-  .calendar {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-    gap: 20px;
-    max-width: 800px;
-    margin: 0 auto 100px;
-    padding: 0 30px;
-  }
-
-  .door {
-    position: relative;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 12px;
-    color: var(--white);
-    text-align: center;
-    font-size: 1.8rem;
-    padding: 25px 0;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    overflow: hidden;
-  }
-
-  .door::before {
-    content: "";
-    position: absolute;
-    top: -100%; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(180deg, rgba(255,255,255,0.25), transparent);
-    transition: 0.4s ease;
-  }
-
-  .door:hover::before { top: 0; }
-  .door:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 20px rgba(255,255,255,0.3);
-    border-color: var(--gold);
-    background: rgba(255,255,255,0.1);
-  }
-
-  footer {
-    text-align: center;
-    font-size: 0.9rem;
-    opacity: 0.6;
-    margin-bottom: 20px;
-  }
-
-  /* ==== Snow Effect ==== */
-  .snowflake {
-    position: fixed;
-    top: 0;
-    color: #fff;
-    user-select: none;
-    z-index: 1000;
-    animation: fall linear infinite;
-    pointer-events: none;
-  }
-
-  @keyframes fall {
-    0% { transform: translateY(-10px) rotate(0deg); }
-    100% { transform: translateY(100vh) rotate(360deg); }
-  }
-</style>
+  <!-- Shared CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -228,6 +24,7 @@
     </ul>
   </nav>
 
+  <!-- Main Content -->
   <section class="hero">
     <h1>The Advent Game</h1>
     <img src="https://raw.githubusercontent.com/Gwill1983/advent-game-2025/refs/heads/main/7B180D93-A675-4598-B815-BE29BA954AD2.png" alt="Christmas Hero">
@@ -263,8 +60,8 @@
 
   <footer>© 2025 The Advent Game — Made with 🎅 and creativity</footer>
 
+  <!-- Snow Effect -->
   <script>
-    // Subtle snowfall
     const snowCount = 40;
     for (let i = 0; i < snowCount; i++) {
       const snow = document.createElement('div');
