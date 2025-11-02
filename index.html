@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>The Advent Game</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
 <style>
@@ -17,15 +16,28 @@
     --white: #f8f9fa;
   }
 
+  /* ==== Page transition ==== */
   body {
     margin: 0;
     background: radial-gradient(circle at 30% 20%, #152238, #000814 80%);
     color: var(--white);
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  body.loaded {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
   }
 
-  /* ===== Hero Section ===== */
+  /* ==== Hero ==== */
   .hero {
     display: flex;
     flex-direction: column;
@@ -36,7 +48,6 @@
     position: relative;
     overflow: hidden;
   }
-
   .hero::after {
     content: "";
     position: absolute;
@@ -44,7 +55,6 @@
     background: radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 70%);
     z-index: 0;
   }
-
   .hero h1 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2.5rem, 8vw, 5rem);
@@ -56,14 +66,12 @@
     animation: fadeIn 2s ease forwards;
     opacity: 0;
   }
-
   .hero p {
     font-weight: 300;
     font-size: 1.2rem;
     opacity: 0;
     animation: fadeIn 2s ease 0.8s forwards;
   }
-
   .hero img {
     width: min(300px, 60%);
     margin: 40px 0;
@@ -72,16 +80,10 @@
     filter: drop-shadow(0 0 25px rgba(255,255,255,0.2));
   }
 
-  @keyframes fadeIn {
-    to { opacity: 1; transform: none; }
-  }
+  @keyframes fadeIn { to { opacity: 1; transform: none; } }
+  @keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);} }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  /* ===== Calendar ===== */
+  /* ==== Calendar ==== */
   .calendar {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
@@ -90,7 +92,6 @@
     margin: 50px auto 100px;
     padding: 0 30px;
   }
-
   .door {
     position: relative;
     background: rgba(255,255,255,0.05);
@@ -104,7 +105,6 @@
     transition: all 0.3s ease;
     overflow: hidden;
   }
-
   .door::before {
     content: "";
     position: absolute;
@@ -112,11 +112,7 @@
     background: linear-gradient(180deg, rgba(255,255,255,0.25), transparent);
     transition: 0.4s ease;
   }
-
-  .door:hover::before {
-    top: 0;
-  }
-
+  .door:hover::before { top: 0; }
   .door:hover {
     transform: scale(1.08);
     box-shadow: 0 0 20px rgba(255,255,255,0.3);
@@ -124,7 +120,7 @@
     background: rgba(255,255,255,0.1);
   }
 
-  /* ===== Snow Effect ===== */
+  /* ==== Snow ==== */
   .snowflake {
     position: fixed;
     top: 0;
@@ -134,20 +130,17 @@
     animation: fall linear infinite;
     pointer-events: none;
   }
-
   @keyframes fall {
     0% { transform: translateY(-10px) rotate(0deg); }
     100% { transform: translateY(100vh) rotate(360deg); }
   }
 
-  /* ===== Footer ===== */
   footer {
     text-align: center;
     font-size: 0.9rem;
     opacity: 0.6;
     margin-bottom: 20px;
   }
-
 </style>
 </head>
 
@@ -188,7 +181,24 @@
   <footer>© 2025 The Advent Game — Made with 🎅 and creativity</footer>
 
   <script>
-    // Subtle snowfall
+    // Fade in when loaded
+    window.addEventListener("load", () => {
+      document.body.classList.add("loaded");
+    });
+
+    // Smooth fade-out on link click
+    document.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", e => {
+        const href = link.getAttribute("href");
+        if (href && href !== "#") {
+          e.preventDefault();
+          document.body.classList.add("fade-out");
+          setTimeout(() => window.location = href, 800);
+        }
+      });
+    });
+
+    // Subtle snow effect
     const snowCount = 40;
     for (let i = 0; i < snowCount; i++) {
       const snow = document.createElement('div');
