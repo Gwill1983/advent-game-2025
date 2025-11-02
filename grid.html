@@ -1,181 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Case File - The Christmas Complaint</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case File - The Christmas Complaint</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
-<style>
-  :root {
-    --gold: #ffca3a;
-    --white: #f8f9fa;
-  }
-
-  /* ==== Sidebar Navigation ==== */
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 240px;
-    height: 100%;
-    background: rgba(10, 20, 40, 0.85);
-    backdrop-filter: blur(8px);
-    padding-top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    transition: all 0.3s ease;
-    z-index: 100;
-  }
-
-  .sidebar .logo {
-    color: var(--gold);
-    font-weight: 700;
-    font-size: 1.4rem;
-    text-align: center;
-    width: 100%;
-    margin-bottom: 30px;
-    letter-spacing: 1px;
-  }
-
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-  }
-
-  .sidebar ul li {
-    width: 100%;
-  }
-
-  .sidebar ul li a {
-    display: block;
-    padding: 14px 24px;
-    color: var(--white);
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-  }
-
-  .sidebar ul li a:hover {
-    background: rgba(255, 255, 255, 0.1);
-    padding-left: 30px;
-  }
-
-  .sidebar ul li a.active {
-    background: linear-gradient(90deg, var(--gold), #ffffff);
-    color: #000;
-    font-weight: 600;
-    border-radius: 0 10px 10px 0;
-  }
-
-  /* ==== Main Layout ==== */
-body {
-  margin-left: 240px;
-  background: radial-gradient(circle at 30% 20%, #152238, #000814 80%);
-  color: var(--white);
-  font-family: 'Poppins', sans-serif;
-  overflow-x: hidden;
-  margin-top: 0;
-}
-
-main {
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 60px 20px;
-}
-
-/* Mobile responsive layout */
-@media (max-width: 768px) {
-  body {
-    margin-left: 60px;
-  }
-  main {
-    padding: 40px 10px;
-  }
-}
-
-
-  @media (max-width: 768px) {
-    .sidebar {
-      width: 60px;
-      align-items: center;
-    }
-    .sidebar .logo {
-      display: none;
-    }
-    .sidebar ul li a {
-      text-align: center;
-      padding: 14px 10px;
-      font-size: 1.2rem;
-    }
-    body {
-      margin-left: 60px;
-    }
-  }
-
-  /* ==== Page Content ==== */
-  h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    margin-top: 40px;
-    background: linear-gradient(90deg, var(--gold), #ffffff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  p {
-    font-size: 1rem;
-    opacity: 0.8;
-    margin-bottom: 30px;
-  }
-
-  .grid-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 40px auto;
-    max-width: 900px;
-  }
-
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 40px;
-  }
-
-  th, td {
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 10px;
-    text-align: center;
-  }
-
-  th {
-    background: rgba(255,255,255,0.1);
-    font-size: 1.2rem;
-  }
-
-  td {
-    background: rgba(255,255,255,0.05);
-    transition: background 0.3s ease;
-  }
-
-  td.crossed {
-    text-decoration: line-through;
-    color: red;
-    opacity: 0.6;
-    background: rgba(255, 0, 0, 0.1);
-  }
-
-  footer {
-    opacity: 0.6;
-    margin-bottom: 20px;
-  }
-</style>
+  <!-- Shared CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -190,6 +24,7 @@ main {
     </ul>
   </nav>
 
+  <!-- Main Content -->
   <main>
     <h1>The Christmas Complaint Case File</h1>
     <p>Each solved clue eliminates a suspect, gift, or location. Your goal: find who complained, what gift they received, and where they are!</p>
