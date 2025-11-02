@@ -1,34 +1,20 @@
-/* ===============================
-   🎄 GLOBAL PREMIUM STYLING
-   =============================== */
 :root {
   --gold: #ffca3a;
-  --deep-gold: #d4a017;
   --white: #f8f9fa;
-  --navy: #0b132b;
   --midnight: #152238;
   --text: #e0e0e0;
-  --accent: #ff758f;
-  --shadow: rgba(0, 0, 0, 0.3);
-}
-
-* {
-  box-sizing: border-box;
+  --shadow: rgba(0,0,0,0.3);
 }
 
 body {
   margin: 0;
-  margin-left: 240px; /* space for sidebar */
+  margin-left: 240px;
   background: radial-gradient(circle at 30% 20%, var(--midnight), #000814 80%);
   color: var(--text);
-  font-family: 'Poppins', sans-serif;
-  overflow-x: hidden;
-  transition: background 0.3s ease;
+  font-family: "Poppins", sans-serif;
 }
 
-/* ===============================
-   🧭 SIDEBAR NAVIGATION
-   =============================== */
+/* Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
@@ -38,63 +24,41 @@ body {
   background: rgba(10, 20, 40, 0.85);
   backdrop-filter: blur(8px);
   padding-top: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   box-shadow: 4px 0 20px var(--shadow);
   z-index: 100;
 }
-
 .sidebar .logo {
   color: var(--gold);
   font-weight: 700;
   font-size: 1.4rem;
   text-align: center;
-  width: 100%;
   margin-bottom: 30px;
-  letter-spacing: 1px;
-  text-shadow: 0 0 10px rgba(255, 202, 58, 0.6);
 }
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-
+.sidebar ul { list-style: none; padding: 0; margin: 0; }
 .sidebar ul li a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display: block;
   padding: 14px 24px;
   color: var(--white);
   text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
-
-.sidebar ul li a:hover {
-  background: rgba(255, 255, 255, 0.1);
-  padding-left: 30px;
-}
-
 .sidebar ul li a.active {
   background: linear-gradient(90deg, var(--gold), #fff);
   color: #000;
-  font-weight: 600;
-  border-radius: 0 10px 10px 0;
-  box-shadow: inset 3px 0 10px rgba(255, 255, 255, 0.3);
 }
 
-/* ===============================
-   ✉️  Cinematic Letter Overlay
-   =============================== */
-.letter-trigger {
-  text-align: center;
-  margin: 40px 0;
+/* Main layout */
+main { max-width: 900px; margin: 0 auto; padding: 60px 20px; text-align: center; }
+h2 {
+  font-family: "Playfair Display", serif;
+  background: linear-gradient(90deg, var(--gold), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+p { line-height: 1.6; }
 
+/* Letter overlay */
+.letter-trigger { text-align: center; margin: 40px 0; }
 #readLetterBtn {
   background: linear-gradient(135deg, var(--gold), #fff7a5);
   color: #222;
@@ -104,20 +68,11 @@ body {
   border-radius: 12px;
   cursor: pointer;
   font-size: 1.1rem;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 25px rgba(255, 230, 150, 0.4);
   animation: pulseBtn 2.8s infinite ease-in-out;
 }
-
 @keyframes pulseBtn {
-  0%, 100% { box-shadow: 0 0 12px rgba(255, 230, 150, 0.4); transform: scale(1); }
-  50% { box-shadow: 0 0 25px rgba(255, 255, 200, 0.8); transform: scale(1.04); }
-}
-
-#readLetterBtn:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 35px rgba(255, 255, 200, 0.8);
+  0%,100% { box-shadow: 0 0 10px rgba(255,230,150,0.4); transform: scale(1); }
+  50% { box-shadow: 0 0 25px rgba(255,255,200,0.8); transform: scale(1.05); }
 }
 
 /* Overlay background */
@@ -132,103 +87,45 @@ body {
   align-items: center;
   animation: fadeIn 0.5s ease forwards;
 }
+@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
 
-/* Letter (Parchment) */
+/* Parchment Letter */
 .letter-box {
-  position: relative;
   background: radial-gradient(circle at 30% 20%, #fffbe8 0%, #f2e1b3 100%);
   border: 2px solid #d4c183;
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.4), inset 0 0 50px rgba(255,255,200,0.25);
-  width: 90%;
-  max-width: 650px;
-  padding: 60px 50px 70px;
+  max-width: 600px;
+  padding: 60px 50px;
   text-align: left;
   color: #3a2e1f;
-  transform: scale(0.9);
-  opacity: 0;
+  font-family: "Homemade Apple", cursive;
   animation: popIn 0.8s ease forwards;
-  background-image:
-    url('https://i.imgur.com/dS7A0Rf.png'),
-    radial-gradient(circle at 30% 20%, #fffbe8 0%, #f2e1b3 100%);
-  background-size: cover;
-  background-blend-mode: multiply;
 }
-
-.letter-box::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  box-shadow: inset 0 0 100px rgba(0,0,0,0.25);
+@keyframes popIn {
+  0% { transform: scale(0.8) translateY(30px); opacity: 0; }
+  60% { transform: scale(1.05) translateY(0); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
 }
-
 .letter-box h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   color: #5a4327;
   text-align: center;
-  font-size: 1.6rem;
   margin-top: 0;
   margin-bottom: 20px;
 }
-
-.letter-box p {
-  font-family: 'Homemade Apple', cursive;
-  font-size: 1.05rem;
-  line-height: 1.9;
-  margin-bottom: 15px;
-}
-
-/* Close button */
 #closeLetterBtn {
   display: block;
   margin: 30px auto 0;
   background: linear-gradient(135deg, #e74c3c, #ffbcbc);
-  color: white;
+  color: #fff;
   border: none;
   padding: 12px 30px;
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 15px rgba(255, 150, 150, 0.4);
+  transition: 0.3s;
 }
+#closeLetterBtn:hover { transform: scale(1.05); }
 
-#closeLetterBtn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(255, 150, 150, 0.6);
-}
-
-/* Animation fix */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes popIn {
-  0% {
-    transform: scale(0.8) translateY(30px);
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.05) translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* ===============================
-   ❄️ FOOTER
-   =============================== */
-footer {
-  text-align: center;
-  font-size: 0.9rem;
-  opacity: 0.6;
-  margin-bottom: 20px;
-}
+footer { text-align: center; font-size: 0.9rem; opacity: 0.6; margin-bottom: 20px; }
