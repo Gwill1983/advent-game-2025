@@ -6,93 +6,125 @@
 <title>The Advent Game</title>
 
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
 <style>
+  :root {
+    --accent: #e63946;
+    --gold: #ffca3a;
+    --dark: #0b0c10;
+    --navy: #1b263b;
+    --white: #f8f9fa;
+  }
+
   body {
     margin: 0;
-    background: radial-gradient(circle at top, #04121f 0%, #000814 100%);
-    color: white;
-    font-family: 'Montserrat', sans-serif;
+    background: radial-gradient(circle at 30% 20%, #152238, #000814 80%);
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
   }
 
-  /* Hero Section */
+  /* ===== Hero Section ===== */
   .hero {
-    height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-height: 90vh;
     text-align: center;
     position: relative;
     overflow: hidden;
   }
 
-  .hero h1 {
-    font-family: 'Bebas Neue', cursive;
-    font-size: 9vw;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    background: linear-gradient(90deg, #00b4d8, #ff006e, #ffd60a);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 25px rgba(255,255,255,0.2);
-    animation: glow 4s ease-in-out infinite alternate;
+  .hero::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 70%);
+    z-index: 0;
   }
 
-  @keyframes glow {
-    from { text-shadow: 0 0 10px #ff006e; }
-    to { text-shadow: 0 0 30px #ffd60a; }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, var(--gold), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+    animation: fadeIn 2s ease forwards;
+    opacity: 0;
+  }
+
+  .hero p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: fadeIn 2s ease 0.8s forwards;
   }
 
   .hero img {
-    width: 220px;
-    margin: 20px 0;
-    animation: float 3.5s ease-in-out infinite;
-    filter: drop-shadow(0 0 20px rgba(255,255,255,0.2));
+    width: min(300px, 60%);
+    margin: 40px 0;
+    animation: float 4s ease-in-out infinite, fadeIn 2s ease 0.4s forwards;
+    opacity: 0;
+    filter: drop-shadow(0 0 25px rgba(255,255,255,0.2));
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; transform: none; }
   }
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+    50% { transform: translateY(-10px); }
   }
 
-  .hero p {
-    font-size: 1.2rem;
-    opacity: 0.8;
-    margin-top: 10px;
-  }
-
-  /* Calendar Section */
+  /* ===== Calendar ===== */
   .calendar {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-    gap: 18px;
-    max-width: 720px;
-    margin: 60px auto 100px auto;
-    padding: 0 20px;
+    gap: 20px;
+    max-width: 800px;
+    margin: 50px auto 100px;
+    padding: 0 30px;
   }
 
   .door {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 15px;
+    position: relative;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    color: var(--white);
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.8rem;
     padding: 25px 0;
-    color: #fff;
     text-decoration: none;
     transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  .door::before {
+    content: "";
+    position: absolute;
+    top: -100%; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.25), transparent);
+    transition: 0.4s ease;
+  }
+
+  .door:hover::before {
+    top: 0;
   }
 
   .door:hover {
-    background: linear-gradient(135deg, #ff006e, #ffd60a);
-    box-shadow: 0 0 20px rgba(255,255,255,0.4);
-    transform: scale(1.1) rotate(-2deg);
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    border-color: var(--gold);
+    background: rgba(255,255,255,0.1);
   }
 
-  /* Snowflakes */
+  /* ===== Snow Effect ===== */
   .snowflake {
     position: fixed;
     top: 0;
@@ -100,20 +132,30 @@
     user-select: none;
     z-index: 1000;
     animation: fall linear infinite;
+    pointer-events: none;
   }
 
   @keyframes fall {
     0% { transform: translateY(-10px) rotate(0deg); }
     100% { transform: translateY(100vh) rotate(360deg); }
   }
+
+  /* ===== Footer ===== */
+  footer {
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.6;
+    margin-bottom: 20px;
+  }
+
 </style>
 </head>
 
 <body>
   <section class="hero">
     <h1>The Advent Game</h1>
-    <img src="https://raw.githubusercontent.com/Gwill1983/advent-game-2025/refs/heads/main/7B180D93-A675-4598-B815-BE29BA954AD2.png" alt="Christmas hero">
-    <p>Unwrap a new puzzle every day until Christmas 🎄</p>
+    <img src="https://raw.githubusercontent.com/Gwill1983/advent-game-2025/refs/heads/main/7B180D93-A675-4598-B815-BE29BA954AD2.png" alt="Christmas Hero">
+    <p>Unwrap a new challenge every day until Christmas 🎄</p>
   </section>
 
   <div class="calendar">
@@ -143,17 +185,19 @@
     <a href="#" class="door">24</a>
   </div>
 
+  <footer>© 2025 The Advent Game — Made with 🎅 and creativity</footer>
+
   <script>
-    // Snowfall
-    const snowCount = 50;
+    // Subtle snowfall
+    const snowCount = 40;
     for (let i = 0; i < snowCount; i++) {
       const snow = document.createElement('div');
       snow.classList.add('snowflake');
       snow.innerHTML = '❄';
       snow.style.left = Math.random() * 100 + 'vw';
-      snow.style.fontSize = Math.random() * 20 + 10 + 'px';
-      snow.style.animationDuration = Math.random() * 5 + 5 + 's';
-      snow.style.opacity = Math.random();
+      snow.style.fontSize = Math.random() * 18 + 8 + 'px';
+      snow.style.animationDuration = Math.random() * 6 + 4 + 's';
+      snow.style.opacity = Math.random() * 0.7;
       document.body.appendChild(snow);
     }
   </script>
