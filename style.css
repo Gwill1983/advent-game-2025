@@ -3,7 +3,7 @@
   --white: #f8f9fa;
   --midnight: #152238;
   --text: #e0e0e0;
-  --shadow: rgba(0,0,0,0.3);
+  --shadow: rgba(0, 0, 0, 0.3);
 }
 
 body {
@@ -11,7 +11,7 @@ body {
   margin-left: 240px;
   background: radial-gradient(circle at 30% 20%, var(--midnight), #000814 80%);
   color: var(--text);
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Sidebar */
@@ -25,7 +25,6 @@ body {
   backdrop-filter: blur(8px);
   padding-top: 40px;
   box-shadow: 4px 0 20px var(--shadow);
-  z-index: 100;
 }
 .sidebar .logo {
   color: var(--gold);
@@ -47,85 +46,106 @@ body {
   color: #000;
 }
 
-/* Main layout */
-main { max-width: 900px; margin: 0 auto; padding: 60px 20px; text-align: center; }
+/* Layout */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  text-align: center;
+}
 h2 {
-  font-family: "Playfair Display", serif;
+  font-family: 'Playfair Display', serif;
   background: linear-gradient(90deg, var(--gold), #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-p { line-height: 1.6; }
 
-/* Letter overlay */
-.letter-trigger { text-align: center; margin: 40px 0; }
-#readLetterBtn {
+/* Envelope + Letter */
+.letter-section {
+  text-align: center;
+  margin-top: 50px;
+}
+.envelope {
+  position: relative;
+  width: 220px;
+  height: 140px;
+  background: #c0392b;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  background: #e74c3c;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.envelope-body {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60%;
+  background: #c0392b;
+  border-radius: 0 0 8px 8px;
+}
+#openLetter {
   background: linear-gradient(135deg, var(--gold), #fff7a5);
   color: #222;
   border: none;
-  padding: 14px 38px;
+  padding: 12px 24px;
   font-weight: 700;
-  border-radius: 12px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1.1rem;
-  animation: pulseBtn 2.8s infinite ease-in-out;
+  margin-top: 30px;
+  transition: all 0.3s ease;
 }
-@keyframes pulseBtn {
-  0%,100% { box-shadow: 0 0 10px rgba(255,230,150,0.4); transform: scale(1); }
-  50% { box-shadow: 0 0 25px rgba(255,255,200,0.8); transform: scale(1.05); }
+#openLetter:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255,255,150,0.6);
 }
 
-/* Overlay background */
-#letterOverlay {
+/* Letter Content */
+.letter-content {
   display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(6px);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 0.5s ease forwards;
-}
-@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-
-/* Parchment Letter */
-.letter-box {
-  background: radial-gradient(circle at 30% 20%, #fffbe8 0%, #f2e1b3 100%);
+  background: #fffbe8;
   border: 2px solid #d4c183;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.4), inset 0 0 50px rgba(255,255,200,0.25);
-  max-width: 600px;
-  padding: 60px 50px;
-  text-align: left;
-  color: #3a2e1f;
-  font-family: "Homemade Apple", cursive;
-  animation: popIn 0.8s ease forwards;
-}
-@keyframes popIn {
-  0% { transform: scale(0.8) translateY(30px); opacity: 0; }
-  60% { transform: scale(1.05) translateY(0); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-.letter-box h2 {
-  font-family: "Playfair Display", serif;
-  color: #5a4327;
-  text-align: center;
-  margin-top: 0;
-  margin-bottom: 20px;
-}
-#closeLetterBtn {
-  display: block;
-  margin: 30px auto 0;
-  background: linear-gradient(135deg, #e74c3c, #ffbcbc);
-  color: #fff;
-  border: none;
-  padding: 12px 30px;
   border-radius: 10px;
+  padding: 30px 40px;
+  width: 80%;
+  max-width: 600px;
+  margin: 40px auto;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  color: #3a2e1f;
+  text-align: left;
+}
+.letter-inner h2 {
+  color: #5a4327;
+  font-family: 'Playfair Display', serif;
+}
+.letter-inner p {
+  font-family: 'Homemade Apple', cursive;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+#closeLetter {
+  display: block;
+  margin: 20px auto 0;
+  background: linear-gradient(135deg, #e74c3c, #ffbcbc);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
 }
-#closeLetterBtn:hover { transform: scale(1.05); }
 
-footer { text-align: center; font-size: 0.9rem; opacity: 0.6; margin-bottom: 20px; }
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
