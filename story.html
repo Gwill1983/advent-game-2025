@@ -75,35 +75,20 @@
 
   <footer>© 2025 The Advent Game — Story by Santa’s Secret Services</footer>
 
-  <script>
-  const openBtn = document.getElementById('openLetter');
-  const closeBtn = document.getElementById('closeLetter');
-  const envelope = document.getElementById('envelope');
-  const letter = document.getElementById('letterContent');
+<script>
+  const readLetterBtn = document.getElementById('readLetterBtn');
+  const letterOverlay = document.getElementById('letterOverlay');
+  const closeLetterBtn = document.getElementById('closeLetterBtn');
 
-  openBtn.addEventListener('click', () => {
-    // Animate envelope and button fade
-    envelope.classList.add('open');
-    openBtn.classList.add('fade-out');
-
-    // Wait for flap animation, then show letter
-    setTimeout(() => {
-      letter.style.display = 'block';
-      setTimeout(() => letter.classList.add('show'), 100);
-    }, 1000);
+  readLetterBtn.addEventListener('click', () => {
+    letterOverlay.style.display = 'flex';
   });
 
-  closeBtn.addEventListener('click', () => {
-    // Hide letter first
-    letter.classList.remove('show');
-    setTimeout(() => {
-      letter.style.display = 'none';
-      // Reset envelope and button
-      envelope.classList.remove('open');
-      openBtn.classList.remove('fade-out');
-    }, 800);
+  closeLetterBtn.addEventListener('click', () => {
+    letterOverlay.style.display = 'none';
   });
 </script>
+
 
 
 
