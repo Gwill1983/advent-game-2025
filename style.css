@@ -63,10 +63,6 @@ body {
   width: 100%;
 }
 
-.sidebar ul li {
-  width: 100%;
-}
-
 .sidebar ul li a {
   display: flex;
   align-items: center;
@@ -89,185 +85,6 @@ body {
   font-weight: 600;
   border-radius: 0 10px 10px 0;
   box-shadow: inset 3px 0 10px rgba(255, 255, 255, 0.3);
-}
-
-/* Mobile responsive */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 60px;
-    align-items: center;
-  }
-  .sidebar .logo {
-    display: none;
-  }
-  .sidebar ul li a {
-    justify-content: center;
-    padding: 14px 10px;
-    font-size: 1.2rem;
-  }
-  body {
-    margin-left: 60px;
-  }
-}
-
-/* ===============================
-   🌟 HERO SECTION
-   =============================== */
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 90vh;
-  text-align: center;
-  position: relative;
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  background: linear-gradient(90deg, var(--gold), #fff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 10px;
-  text-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
-  animation: fadeIn 1.5s ease forwards;
-  opacity: 0;
-}
-
-.hero img {
-  width: min(300px, 60%);
-  margin: 40px 0;
-  animation: float 4s ease-in-out infinite, fadeIn 1.5s ease 0.4s forwards;
-  opacity: 0;
-  filter: drop-shadow(0 0 25px rgba(255,255,255,0.2));
-}
-
-.hero p {
-  font-weight: 300;
-  font-size: 1.1rem;
-  opacity: 0;
-  animation: fadeIn 1.5s ease 0.8s forwards;
-}
-
-@keyframes fadeIn {
-  to { opacity: 1; transform: none; }
-}
-@keyframes float {
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-10px);}
-}
-
-/* ===============================
-   📆 CALENDAR
-   =============================== */
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-  gap: 20px;
-  max-width: 800px;
-  margin: 0 auto 100px;
-  padding: 0 30px;
-}
-
-.door {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 12px;
-  color: var(--white);
-  text-align: center;
-  font-size: 1.8rem;
-  padding: 25px 0;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  overflow: hidden;
-  position: relative;
-}
-
-.door:hover {
-  transform: scale(1.05);
-  border-color: var(--gold);
-  background: rgba(255,255,255,0.1);
-  box-shadow: 0 0 20px rgba(255,255,255,0.25);
-}
-
-.door::before {
-  content: "";
-  position: absolute;
-  top: -100%; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,0.25), transparent);
-  transition: 0.4s ease;
-}
-.door:hover::before { top: 0; }
-
-/* ===============================
-   🧩 CASE FILE PAGE
-   =============================== */
-main {
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 60px 20px;
-}
-
-h1, h2 {
-  font-family: 'Playfair Display', serif;
-  background: linear-gradient(90deg, var(--gold), #fff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-h2 {
-  font-size: 1.8rem;
-  margin: 40px 0 20px;
-}
-
-p {
-  font-size: 1rem;
-  opacity: 0.85;
-  margin-bottom: 20px;
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-  margin-bottom: 40px;
-  box-shadow: 0 0 10px rgba(255,255,255,0.05);
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-th, td {
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 12px;
-  text-align: center;
-}
-
-th {
-  background: rgba(255,255,255,0.1);
-  font-size: 1.1rem;
-}
-
-td {
-  background: rgba(255,255,255,0.03);
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-td:hover {
-  background: rgba(255,255,255,0.1);
-  transform: scale(1.03);
-}
-
-td.crossed {
-  text-decoration: line-through;
-  color: red;
-  opacity: 0.6;
-  background: rgba(255, 0, 0, 0.1);
 }
 
 /* ===============================
@@ -307,29 +124,6 @@ td.crossed {
 #letterOverlay {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 0.5s ease forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* ===============================
-   📜 Parchment Letter Styling
-   =============================== */
-#letterOverlay {
-  display: none;
-  position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(6px);
@@ -339,14 +133,13 @@ td.crossed {
   animation: fadeIn 0.5s ease forwards;
 }
 
+/* Letter (Parchment) */
 .letter-box {
   position: relative;
   background: radial-gradient(circle at 30% 20%, #fffbe8 0%, #f2e1b3 100%);
   border: 2px solid #d4c183;
   border-radius: 12px;
-  box-shadow:
-    0 10px 40px rgba(0,0,0,0.4),
-    inset 0 0 50px rgba(255,255,200,0.25);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4), inset 0 0 50px rgba(255,255,200,0.25);
   width: 90%;
   max-width: 650px;
   padding: 60px 50px 70px;
@@ -356,14 +149,13 @@ td.crossed {
   opacity: 0;
   animation: popIn 0.8s ease forwards;
   background-image:
-    url('https://i.imgur.com/dS7A0Rf.png'), /* subtle parchment texture */
+    url('https://i.imgur.com/dS7A0Rf.png'),
     radial-gradient(circle at 30% 20%, #fffbe8 0%, #f2e1b3 100%);
   background-size: cover;
   background-blend-mode: multiply;
 }
 
-.letter-box::before,
-.letter-box::after {
+.letter-box::before {
   content: "";
   position: absolute;
   top: 0;
@@ -371,11 +163,6 @@ td.crossed {
   width: 100%;
   height: 100%;
   border-radius: 12px;
-  pointer-events: none;
-}
-
-/* faint vignette around edges */
-.letter-box::before {
   box-shadow: inset 0 0 100px rgba(0,0,0,0.25);
 }
 
@@ -395,6 +182,7 @@ td.crossed {
   margin-bottom: 15px;
 }
 
+/* Close button */
 #closeLetterBtn {
   display: block;
   margin: 30px auto 0;
@@ -413,35 +201,34 @@ td.crossed {
   transform: scale(1.05);
   box-shadow: 0 0 25px rgba(255, 150, 150, 0.6);
 }
-.letter-box {
-  border: 3px solid red;     /* test only */
-  background-color: #fffbe8; /* test only */
+
+/* Animation fix */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-
-
-
+@keyframes popIn {
+  0% {
+    transform: scale(0.8) translateY(30px);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 
 /* ===============================
-   ❄️ FOOTER + SNOW
+   ❄️ FOOTER
    =============================== */
 footer {
   text-align: center;
   font-size: 0.9rem;
   opacity: 0.6;
   margin-bottom: 20px;
-}
-
-.snowflake {
-  position: fixed;
-  top: 0;
-  color: #fff;
-  user-select: none;
-  z-index: 1000;
-  animation: fall linear infinite;
-  pointer-events: none;
-}
-@keyframes fall {
-  0% { transform: translateY(-10px) rotate(0deg); }
-  100% { transform: translateY(100vh) rotate(360deg); }
 }
