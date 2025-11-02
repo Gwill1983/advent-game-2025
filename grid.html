@@ -72,16 +72,33 @@
     border-radius: 0 10px 10px 0;
   }
 
-  /* Adjust main content */
+  /* ==== Main Layout ==== */
+body {
+  margin-left: 240px;
+  background: radial-gradient(circle at 30% 20%, #152238, #000814 80%);
+  color: var(--white);
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+  margin-top: 0;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+/* Mobile responsive layout */
+@media (max-width: 768px) {
   body {
-    margin-left: 240px;
-    background: radial-gradient(circle at 30% 20%, #152238, #000814 80%);
-    color: var(--white);
-    font-family: 'Poppins', sans-serif;
-    overflow-x: hidden;
-    margin-top: 0;
-    text-align: center;
+    margin-left: 60px;
   }
+  main {
+    padding: 40px 10px;
+  }
+}
+
 
   @media (max-width: 768px) {
     .sidebar {
