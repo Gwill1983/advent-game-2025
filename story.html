@@ -1,56 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Story - Advent Game</title>
-
-  <!-- Google Fonts + Shared Styles -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Homemade+Apple&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <!-- Sidebar -->
-  <nav class="sidebar">
-    <div class="logo">🎄 Advent Game</div>
-    <ul>
-      <li><a href="index.html">🏠 Calendar</a></li>
-      <li><a href="grid.html">🕵️ Case File</a></li>
-      <li><a href="story.html" class="active">📜 Story</a></li>
-      <li><a href="help.html">❓ Help</a></li>
-    </ul>
-  </nav>
+  <div class="stars-container"></div>
 
-  <main>
-    
-    <section>
-      <h2>🎅 The Situation</h2>
-      <p>It all began one frosty morning when Santa received a mysterious letter of complaint. 
-      The writer claimed their Christmas gift quality had dropped significantly — but they didn’t sign their name. 
-      Shocked and worried, Santa called upon his most trusted investigator: <strong>you</strong>.</p>
-    </section>
+  <header class="navbar">
+    <div class="logo">The Advent Game</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="grid.html">Case File</a></li>
+        <li><a href="story.html" class="active">Story</a></li>
+        <li><a href="help.html">Help</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <section class="letter-section">
-      <div class="envelope" id="envelope">
-        <div class="envelope-flap"></div>
-        <div class="envelope-body"></div>
-      </div>
+  <main class="page-content">
+    <h1>📜 The Story So Far</h1>
+    <p>It all began one frosty morning when Santa received a mysterious letter of complaint...</p>
+    <p>Each clue you uncover will help reveal the sender, the gift, and the place that could save Christmas.</p>
+  </main>
 
-      <button id="openLetter">Open the Letter</button>
+  <footer>© 2025 The Advent Game — All Rights Reserved</footer>
 
-      <div class="letter-content" id="letterContent">
-        <div class="letter-inner">
-          <h2>Dear Santa,</h2>
-          <p>
-            I must complain about the quality of gifts this year. My drone wouldn’t fly,
-            the sweater was two sizes too small, and the chocolate... well, let’s just
-            say it didn’t taste like magic!
-          </p>
-          <p>
-            Sincerely,<br>
-            <em>An Anonymous Elf</em>
-          </p>
-        </div>
-        <button id="clos
+  <script>
+    const starsContainer = document.querySelector('.stars-container');
+    const starCount = 60;
+    const stars = [];
+    for (let i = 0; i < starCount; i++) {
+      const s = document.createElement('div');
+      s.classList.add('star');
+      const size = Math.random() * 4 + 2;
+      s.style.width = `${size}px`;
+      s.style.height = `${size}px`;
+      s.style.left = `${Math.random() * 100}%`;
+      s.style.top = `${Math.random() * 100}%`;
+      s.style.animationDelay = `${Math.random() * 6}s`;
+      starsContainer.appendChild(s);
+      stars.push({ el: s, x: parseFloat(s.style.left), y: parseFloat(s.style.top), dx: (Math.random() - 0.5) * 0.02, dy: (Math.random() - 0.5) * 0.02 });
+    }
+    function animateStars() {
+      stars.forEach(s => {
+        s.x += s.dx; s.y += s.dy;
+        if (s.x < 0) s.x = 100; if (s.x > 100) s.x = 0;
+        if (s.y < 0) s.y = 100; if (s.y > 100) s.y = 0;
+        s.el.style.left = `${s.x}%`; s.el.style.top = `${s.y}%`;
+      });
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+  </script>
+</body>
+</html>
