@@ -42,5 +42,28 @@
   </section>
 
   <footer>© 2025 The Advent Game — All Rights Reserved</footer>
+    <footer>© 2025 The Advent Game — All Rights Reserved</footer>
+
+  <!-- Starfield Script -->
+  <script>
+    // Create a soft golden twinkle effect
+    const starsContainer = document.querySelector('.stars-container');
+    const starCount = 60; // adjust number of stars here
+
+    for (let i = 0; i < starCount; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.width = `${Math.random() * 4 + 2}px`;
+      star.style.height = star.style.width;
+      star.style.animationDelay = `${Math.random() * 6}s`;
+      starsContainer.appendChild(star);
+    }
+  </script>
+
+</body>
+</html>
+
 </body>
 </html>
