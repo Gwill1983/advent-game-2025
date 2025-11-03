@@ -27,28 +27,98 @@
 
   <main class="page-content">
     <h1>Your Case File</h1>
-    <p>Track your discoveries here. Each correct answer will automatically cross out suspects, gifts, and locations as you progress through the month.</p>
+    <p>Track your discoveries here. Each correct answer will automatically cross out suspects, gifts, and locations as you progress.</p>
 
-    <div class="case-grid">
-      <div class="case-section">
-        <h2>Suspects</h2>
-        <ul>
-          <li>Elf Sprinkles</li>
-          <li>Mrs. Claus</li>
-          <li>Rudolph</li>
-          <li>Frosty McSnow</li>
-          <li>Tinsel Twig</li>
-          <li>Holly Berry</li>
-          <li>Chris Pine</li>
-          <li>Ivy Spark</li>
-          <li>Noel Frost</li>
-        </ul>
+    <!-- Suspects -->
+    <section class="case-block">
+      <h2>Suspects</h2>
+      <div class="case-grid-3x3">
+        <div class="tile">Elf Sprinkles</div>
+        <div class="tile">Mrs. Claus</div>
+        <div class="tile">Rudolph</div>
+        <div class="tile">Frosty McSnow</div>
+        <div class="tile">Tinsel Twig</div>
+        <div class="tile">Holly Berry</div>
+        <div class="tile">Chris Pine</div>
+        <div class="tile">Ivy Spark</div>
+        <div class="tile">Noel Frost</div>
       </div>
+    </section>
 
-      <div class="case-section">
-        <h2>Gifts</h2>
-        <ul>
-          <li>Drone</li>
-          <li>Sweater</li>
-          <li>Chocolate</li>
-          <li>Boa
+    <!-- Gifts -->
+    <section class="case-block">
+      <h2>Gifts</h2>
+      <div class="case-grid-3x3">
+        <div class="tile">Drone</div>
+        <div class="tile">Sweater</div>
+        <div class="tile">Chocolate</div>
+        <div class="tile">Board Game</div>
+        <div class="tile">Toy Train</div>
+        <div class="tile">Book</div>
+        <div class="tile">Socks</div>
+        <div class="tile">Candle</div>
+        <div class="tile">Slippers</div>
+      </div>
+    </section>
+
+    <!-- Locations -->
+    <section class="case-block">
+      <h2>Locations</h2>
+      <div class="case-grid-3x3">
+        <div class="tile">Lapland</div>
+        <div class="tile">North Pole</div>
+        <div class="tile">Greenland</div>
+        <div class="tile">London</div>
+        <div class="tile">New York</div>
+        <div class="tile">Paris</div>
+        <div class="tile">Tokyo</div>
+        <div class="tile">Toronto</div>
+        <div class="tile">Rio</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2025 The Advent Game — All Rights Reserved</footer>
+
+  <!-- Starfield Animation -->
+  <script>
+    const starsContainer = document.querySelector('.stars-container');
+    const starCount = 60;
+    const stars = [];
+
+    for (let i = 0; i < starCount; i++) {
+      const s = document.createElement('div');
+      s.classList.add('star');
+      const size = Math.random() * 4 + 2;
+      s.style.width = `${size}px`;
+      s.style.height = `${size}px`;
+      s.style.left = `${Math.random() * 100}%`;
+      s.style.top = `${Math.random() * 100}%`;
+      s.style.animationDelay = `${Math.random() * 6}s`;
+      starsContainer.appendChild(s);
+      stars.push({
+        el: s,
+        x: parseFloat(s.style.left),
+        y: parseFloat(s.style.top),
+        dx: (Math.random() - 0.5) * 0.02,
+        dy: (Math.random() - 0.5) * 0.02
+      });
+    }
+
+    function animateStars() {
+      stars.forEach(s => {
+        s.x += s.dx;
+        s.y += s.dy;
+        if (s.x < 0) s.x = 100;
+        if (s.x > 100) s.x = 0;
+        if (s.y < 0) s.y = 100;
+        if (s.y > 100) s.y = 0;
+        s.el.style.left = `${s.x}%`;
+        s.el.style.top = `${s.y}%`;
+      });
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+  </script>
+</body>
+</html>
