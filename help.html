@@ -4,13 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Help - The Advent Game</title>
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+  <!-- Floating star background -->
   <div class="stars-container"></div>
 
+  <!-- Navbar -->
   <header class="navbar">
     <div class="logo">The Advent Game</div>
     <nav>
@@ -23,35 +27,50 @@
     </nav>
   </header>
 
+  <!-- Page Content -->
   <main class="page-content">
-    <h1>❓ How to Play</h1>
-    <p>Welcome to <strong>The Advent Game</strong> — your mission is to solve the mystery of the anonymous letter sent to Santa.</p>
+    <h1>Help & Instructions</h1>
+    <p>Welcome to <strong>The Advent Game</strong> — your festive mission to help Santa solve a Christmas mystery.</p>
 
-    <h2>🎯 Objective</h2>
-    <p>Uncover three key facts before Christmas Eve:</p>
-    <ul>
-      <li>Who sent the letter</li>
-      <li>What gift they received</li>
-      <li>Where in the world they are</li>
-    </ul>
+    <section>
+      <h2>🎯 Objective</h2>
+      <p>Your goal is to uncover three critical details before Christmas Eve:</p>
+      <ul>
+        <li><strong>Who</strong> sent the mysterious letter</li>
+        <li><strong>What</strong> gift they received</li>
+        <li><strong>Where</strong> they are in the world</li>
+      </ul>
+    </section>
 
-    <h2>🧩 Daily Challenges</h2>
-    <p>Each day, a new riddle will appear on the calendar. Solve it to reveal a secret location in the real world. Visiting that location will help you unlock clues and eliminate suspects.</p>
+    <section>
+      <h2>🧩 Daily Challenges</h2>
+      <p>Each day in December, a new challenge will unlock on the calendar. Solve the riddle to find a <a href="https://what3words.com" target="_blank">what3words</a> location, then visit it in the real world to uncover a QR code or hidden message that reveals a clue.</p>
+      <p>Every correct discovery will update your <a href="grid.html" class="highlight-link">Case File</a>, helping you eliminate incorrect suspects, gifts, and locations.</p>
+    </section>
 
-    <h2>💡 Tips</h2>
-    <ul>
-      <li>Use your phone’s GPS to visit the <a href="https://what3words.com/" target="_blank">what3words</a> location.</li>
-      <li>Scan QR codes or tap NFC tags when you find them.</li>
-      <li>Update your Case File after each discovery.</li>
-    </ul>
+    <section>
+      <h2>💡 Tips for Success</h2>
+      <ul>
+        <li>Check the calendar daily — new clues unlock automatically each morning.</li>
+        <li>Keep your phone charged and location services enabled for on-the-go puzzles.</li>
+        <li>Collaborate with your family or teammates — every clue matters!</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🧭 Need More Help?</h2>
+      <p>If you get stuck, you can revisit previous days or use small hints hidden around the game interface. But remember — Santa’s watching, so use them wisely!</p>
+    </section>
   </main>
 
   <footer>© 2025 The Advent Game — All Rights Reserved</footer>
 
+  <!-- Starfield Script -->
   <script>
     const starsContainer = document.querySelector('.stars-container');
     const starCount = 60;
     const stars = [];
+
     for (let i = 0; i < starCount; i++) {
       const s = document.createElement('div');
       s.classList.add('star');
@@ -62,14 +81,25 @@
       s.style.top = `${Math.random() * 100}%`;
       s.style.animationDelay = `${Math.random() * 6}s`;
       starsContainer.appendChild(s);
-      stars.push({ el: s, x: parseFloat(s.style.left), y: parseFloat(s.style.top), dx: (Math.random() - 0.5) * 0.02, dy: (Math.random() - 0.5) * 0.02 });
+      stars.push({
+        el: s,
+        x: parseFloat(s.style.left),
+        y: parseFloat(s.style.top),
+        dx: (Math.random() - 0.5) * 0.02,
+        dy: (Math.random() - 0.5) * 0.02
+      });
     }
+
     function animateStars() {
       stars.forEach(s => {
-        s.x += s.dx; s.y += s.dy;
-        if (s.x < 0) s.x = 100; if (s.x > 100) s.x = 0;
-        if (s.y < 0) s.y = 100; if (s.y > 100) s.y = 0;
-        s.el.style.left = `${s.x}%`; s.el.style.top = `${s.y}%`;
+        s.x += s.dx;
+        s.y += s.dy;
+        if (s.x < 0) s.x = 100;
+        if (s.x > 100) s.x = 0;
+        if (s.y < 0) s.y = 100;
+        if (s.y > 100) s.y = 0;
+        s.el.style.left = `${s.x}%`;
+        s.el.style.top = `${s.y}%`;
       });
       requestAnimationFrame(animateStars);
     }
