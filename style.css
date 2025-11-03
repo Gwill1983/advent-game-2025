@@ -182,7 +182,7 @@ footer {
   margin-bottom: 30px;
 }
 
-/* ===== Cinematic Splash Screen ===== */
+/* ===== Cinematic Splash Screen with Gold Shimmer ===== */
 #splash-screen {
   position: fixed;
   top: 0;
@@ -193,12 +193,35 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   z-index: 9999;
   opacity: 1;
 }
 
+/* ✨ Subtle animated gold shimmer layer */
+#splash-screen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150%;
+  height: 150%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 255, 200, 0.05),
+    rgba(255, 220, 120, 0.15),
+    transparent 120deg,
+    rgba(255, 255, 200, 0.05)
+  );
+  animation: shimmerRotate 12s linear infinite;
+  filter: blur(60px);
+  z-index: 0;
+}
+
+/* Glow text content above shimmer */
 .splash-text {
   text-align: center;
+  z-index: 2;
   animation: fadeInUp 1.4s ease forwards;
 }
 
@@ -211,7 +234,7 @@ footer {
   letter-spacing: 2px;
   text-shadow: 0 0 25px rgba(255, 255, 200, 0.5);
   margin-bottom: 12px;
-  animation: logoPulse 2s ease-in-out infinite alternate;
+  animation: logoPulse 2.2s ease-in-out infinite alternate;
 }
 
 .splash-text p {
@@ -228,6 +251,11 @@ footer {
 }
 
 /* === Animations === */
+@keyframes shimmerRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
@@ -235,10 +263,12 @@ footer {
 
 @keyframes logoPulse {
   0% { text-shadow: 0 0 10px rgba(255,255,180,0.4), 0 0 20px rgba(212,175,55,0.3); }
-  100% { text-shadow: 0 0 30px rgba(255,255,220,0.8), 0 0 60px rgba(212,175,55,0.6); }
+  100% { text-shadow: 0 0 35px rgba(255,255,220,0.8), 0 0 80px rgba(212,175,55,0.6); }
 }
 
 @keyframes cinematicFadeOut {
   0% { opacity: 1; transform: scale(1); filter: blur(0) brightness(1); }
-  40% { opacity: 1; transform: scale(1.1); filter: brightness(1.5); }
-  70% { opacity: 0.7; transform: scale(1.15); filter: blur(6px) brightness(1.8); }
+  40% { opacity: 1; transform: scale(1.08); filter: brightness(1.4); }
+  70% { opacity: 0.8; transform: scale(1.15); filter: blur(6px) brightness(1.7); }
+  100% { opacity: 0; transform: scale(1.25); filter: blur(25px) brightness(2); }
+}
