@@ -4,76 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Advent Game</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
-  <!-- Shared CSS -->
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <!-- Sidebar Navigation -->
-  <nav class="sidebar">
-  <div class="logo">🎄 Advent Game</div>
-  <ul>
-    <li><a href="index.html" class="active">🏠 Calendar</a></li>
-    <li><a href="grid.html">🕵️ Case File</a></li>
-    <li><a href="story.html">📜 Story</a></li>
-    <li><a href="help.html">❓ Help</a></li>
-  </ul>
-</nav>
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="logo">🎄 The Advent Game</div>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="grid.html">Case File</a></li>
+        <li><a href="story.html">Story</a></li>
+        <li><a href="help.html">Help</a></li>
+      </ul>
+    </nav>
+  </header>
 
-
-  <!-- Main Content -->
+  <!-- Hero Section -->
   <section class="hero">
-    <h1>The Advent Game</h1>
-    <img src="https://raw.githubusercontent.com/Gwill1983/advent-game-2025/refs/heads/main/7B180D93-A675-4598-B815-BE29BA954AD2.png" alt="Christmas Hero">
-    <p>Unwrap a new challenge every day until Christmas 🎄</p>
+    <h1>24 Days of Christmas Mystery</h1>
+    <p>Unwrap a clue every day to solve Santa’s greatest mystery.</p>
+    <button class="cta">Begin Investigation</button>
   </section>
 
-  <div class="calendar">
-    <a href="day1.html" class="door">1</a>
-    <a href="#" class="door">2</a>
-    <a href="#" class="door">3</a>
-    <a href="#" class="door">4</a>
-    <a href="#" class="door">5</a>
-    <a href="#" class="door">6</a>
-    <a href="#" class="door">7</a>
-    <a href="#" class="door">8</a>
-    <a href="#" class="door">9</a>
-    <a href="#" class="door">10</a>
-    <a href="#" class="door">11</a>
-    <a href="#" class="door">12</a>
-    <a href="#" class="door">13</a>
-    <a href="#" class="door">14</a>
-    <a href="#" class="door">15</a>
-    <a href="#" class="door">16</a>
-    <a href="#" class="door">17</a>
-    <a href="#" class="door">18</a>
-    <a href="#" class="door">19</a>
-    <a href="#" class="door">20</a>
-    <a href="#" class="door">21</a>
-    <a href="#" class="door">22</a>
-    <a href="#" class="door">23</a>
-    <a href="#" class="door">24</a>
-  </div>
+  <!-- Advent Calendar Grid -->
+  <section class="calendar">
+    <div class="calendar-grid">
+      <!-- Generate 24 boxes -->
+      <script>
+        for (let i = 1; i <= 24; i++) {
+          document.write(`<div class="day-box"><span>${i}</span></div>`);
+        }
+      </script>
+    </div>
+  </section>
 
-  <footer>© 2025 The Advent Game — Made with 🎅 and creativity</footer>
-
-  <!-- Snow Effect -->
-  <script>
-    const snowCount = 40;
-    for (let i = 0; i < snowCount; i++) {
-      const snow = document.createElement('div');
-      snow.classList.add('snowflake');
-      snow.innerHTML = '❄';
-      snow.style.left = Math.random() * 100 + 'vw';
-      snow.style.fontSize = Math.random() * 18 + 8 + 'px';
-      snow.style.animationDuration = Math.random() * 6 + 4 + 's';
-      snow.style.opacity = Math.random() * 0.7;
-      document.body.appendChild(snow);
-    }
-  </script>
+  <footer>© 2025 The Advent Game — All Rights Reserved</footer>
 </body>
 </html>
