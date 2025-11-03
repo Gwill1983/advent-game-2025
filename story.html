@@ -124,5 +124,53 @@
       overlay.classList.remove("visible");
     });
   </script>
+  <!-- Email Modal -->
+<div id="email-overlay" class="hidden">
+  <div id="email-modal">
+    <div class="email-header">
+      <span class="email-subject">URGENT: Christmas Quality Issue</span>
+      <button id="close-email" class="close-btn">&times;</button>
+    </div>
+    <div class="email-meta">
+      <p><strong>From:</strong> <span>anon@northpolemail.com</span></p>
+      <p><strong>To:</strong> <span>santa@northpolehq.com</span></p>
+      <p><strong>Date:</strong> Frosty Morning, Dec 1</p>
+    </div>
+    <div class="email-body">
+      <p>Dear Santa,</p>
+      <p>
+        I must raise serious concerns about the gifts delivered this season. The craftsmanship seems… off.  
+        The toys don’t sparkle, the magic feels dull, and several children have started asking questions.  
+        Someone inside the Workshop is sabotaging Christmas. Find out who — before it’s too late.
+      </p>
+      <p>Sincerely,<br><em>Anon</em></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Email modal script
+  const openEmail = document.querySelector('.open-email-btn');
+  const closeEmail = document.getElementById('close-email');
+  const overlay = document.getElementById('email-overlay');
+
+  openEmail.addEventListener('click', () => {
+    overlay.classList.remove('hidden');
+    setTimeout(() => overlay.classList.add('visible'), 10);
+  });
+
+  closeEmail.addEventListener('click', () => {
+    overlay.classList.remove('visible');
+    setTimeout(() => overlay.classList.add('hidden'), 300);
+  });
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('visible');
+      setTimeout(() => overlay.classList.add('hidden'), 300);
+    }
+  });
+</script>
+
 </body>
 </html>
