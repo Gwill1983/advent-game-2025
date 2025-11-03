@@ -95,25 +95,45 @@
       requestAnimationFrame(animateStars);
     }
     animateStars();
-// Add stars inside splash screen
-const splash = document.getElementById('splash-screen');
-for (let i = 0; i < 40; i++) {
-  const star = document.createElement('div');
-  star.classList.add('star');
-  star.style.left = `${Math.random() * 100}%`;
-  star.style.top = `${Math.random() * 100}%`;
-  star.style.animationDelay = `${Math.random() * 5}s`;
-  splash.appendChild(star);
-}
 
-    // ---- Splash fade-out timing ----
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        document.getElementById("splash-screen").classList.add("fade-out");
-      }, 2500); // how long splash stays visible
-      setTimeout(() => {
-        document.getElementById("splash-screen").style.display = "none";
-      }, 4000); // when it fully disappears
+    // ---- Stars inside splash screen ----
+    const splash = document.getElementById('splash-screen');
+    if (splash) {
+      for (let i = 0; i < 40; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 5}s`;
+        splash.appendChild(star);
+      }
+    }
+
+    // ---- Splash logic ----
+    document.addEventListener("DOMContentLoaded", () => {
+      const splashElement = document.getElementById("splash-screen");
+      const hasSeenSplash = sessionStorage.getItem("splashShown");
+
+      // If splash has already been shown this session, skip it
+      if (hasSeenSplash && splashElement) {
+        splashElement.style.display = "none";
+        document.body.style.overflow = "auto";
+        return;
+      }
+
+      // Otherwise show splash once per session
+      if (splashElement) {
+        setTimeout(() => {
+          splashElement.classList.add("fade-out");
+          setTimeout(() => {
+            splashElement.style.display = "none";
+            document.body.style.overflow = "auto";
+          }, 1600); // fade-out duration
+        }, 2000); // how long splash stays visible before fading
+      }
+
+      // Mark splash as shown for this session
+      sessionStorage.setItem("splashShown", "true");
     });
   </script>
 </body>
