@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Story - Advent Game</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <title>The Advent Game – Story</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+  <!-- Golden Star Background -->
   <div class="stars-container"></div>
 
+  <!-- Navigation Bar -->
   <header class="navbar">
     <div class="logo">The Advent Game</div>
     <nav>
@@ -24,39 +28,101 @@
   </header>
 
   <main class="page-content">
-    <h1>📜 The Story So Far</h1>
-    <p>It all began one frosty morning when Santa received a mysterious letter of complaint...</p>
-    <p>Each clue you uncover will help reveal the sender, the gift, and the place that could save Christmas.</p>
+    <h1>The Story So Far</h1>
+    <p class="intro-text">It began with a single email — sent on a frosty North Pole morning...</p>
+
+    <!-- Inbox Preview -->
+    <div class="inbox">
+      <div class="email-preview">
+        <div class="email-header">
+          <span class="from">anon@northpolemail.com</span>
+          <span class="subject">URGENT: Christmas Quality Issue</span>
+        </div>
+        <button id="openEmailBtn" class="cta">Open Email</button>
+      </div>
+    </div>
+
+    <!-- Email Overlay -->
+    <div id="emailOverlay">
+      <div class="email-box">
+        <div class="email-header-full">
+          <p><strong>From:</strong> anon@northpolemail.com</p>
+          <p><strong>To:</strong> santa@northpolehq.com</p>
+          <p><strong>Subject:</strong> URGENT: Christmas Quality Issue</p>
+        </div>
+        <div class="email-body">
+          <p>Dear Santa,</p>
+          <p>
+            I must raise serious concerns about the gifts delivered this season.
+            The craftsmanship seems... off. The toys don’t sparkle, the magic feels dull,
+            and several children have started asking questions.
+          </p>
+          <p>
+            Someone inside the Workshop is sabotaging Christmas.  
+            Find out who — before it’s too late.
+          </p>
+          <p>Sincerely,<br><em>Anon</em></p>
+        </div>
+        <button id="closeEmailBtn" class="cta small">Close Email</button>
+      </div>
+    </div>
   </main>
 
   <footer>© 2025 The Advent Game — All Rights Reserved</footer>
 
+  <!-- Stars + Email Script -->
   <script>
+    // ---- Starfield (same as homepage) ----
     const starsContainer = document.querySelector('.stars-container');
     const starCount = 60;
     const stars = [];
+
     for (let i = 0; i < starCount; i++) {
-      const s = document.createElement('div');
-      s.classList.add('star');
+      const star = document.createElement('div');
+      star.classList.add('star');
       const size = Math.random() * 4 + 2;
-      s.style.width = `${size}px`;
-      s.style.height = `${size}px`;
-      s.style.left = `${Math.random() * 100}%`;
-      s.style.top = `${Math.random() * 100}%`;
-      s.style.animationDelay = `${Math.random() * 6}s`;
-      starsContainer.appendChild(s);
-      stars.push({ el: s, x: parseFloat(s.style.left), y: parseFloat(s.style.top), dx: (Math.random() - 0.5) * 0.02, dy: (Math.random() - 0.5) * 0.02 });
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.animationDelay = `${Math.random() * 6}s`;
+      starsContainer.appendChild(star);
+      stars.push({
+        el: star,
+        x: parseFloat(star.style.left),
+        y: parseFloat(star.style.top),
+        dx: (Math.random() - 0.5) * 0.02,
+        dy: (Math.random() - 0.5) * 0.02,
+      });
     }
+
     function animateStars() {
       stars.forEach(s => {
-        s.x += s.dx; s.y += s.dy;
-        if (s.x < 0) s.x = 100; if (s.x > 100) s.x = 0;
-        if (s.y < 0) s.y = 100; if (s.y > 100) s.y = 0;
-        s.el.style.left = `${s.x}%`; s.el.style.top = `${s.y}%`;
+        s.x += s.dx;
+        s.y += s.dy;
+        if (s.x < 0) s.x = 100;
+        if (s.x > 100) s.x = 0;
+        if (s.y < 0) s.y = 100;
+        if (s.y > 100) s.y = 0;
+        s.el.style.left = `${s.x}%`;
+        s.el.style.top = `${s.y}%`;
       });
       requestAnimationFrame(animateStars);
     }
     animateStars();
+
+    // ---- Email Interactions ----
+    const openBtn = document.getElementById("openEmailBtn");
+    const closeBtn = document.getElementById("closeEmailBtn");
+    const overlay = document.getElementById("emailOverlay");
+
+    openBtn.addEventListener("click", () => {
+      overlay.classList.add("visible");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      overlay.classList.remove("visible");
+    });
   </script>
 </body>
 </html>
