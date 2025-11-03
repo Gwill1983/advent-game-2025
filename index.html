@@ -35,44 +35,75 @@
     </nav>
   </header>
 
-  <!-- Hero, calendar, footer ... (your existing content here) -->
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>24 Days of Christmas Mystery</h1>
+    <p>Unwrap a clue every day to solve Santa’s greatest mystery.</p>
+    <button class="cta">Begin Investigation</button>
+  </section>
 
-  <!-- Starfield + Splash script just before </body> -->
+  <!-- Advent Calendar Grid -->
+  <section class="calendar">
+    <div class="calendar-grid">
+      <script>
+        for (let i = 1; i <= 24; i++) {
+          document.write(`<div class="day-box"><span>${i}</span></div>`);
+        }
+      </script>
+    </div>
+  </section>
+
+  <footer>© 2025 The Advent Game — All Rights Reserved</footer>
+
+  <!-- Starfield + Splash Script -->
   <script>
-    // Starfield (drifting)
+    // ---- Golden Starfield ----
     const starsContainer = document.querySelector('.stars-container');
     const starCount = 60;
     const stars = [];
+
     for (let i = 0; i < starCount; i++) {
-      const s = document.createElement('div');
-      s.classList.add('star');
+      const star = document.createElement('div');
+      star.classList.add('star');
       const size = Math.random() * 4 + 2;
-      s.style.width = `${size}px`;
-      s.style.height = `${size}px`;
-      s.style.left = `${Math.random() * 100}%`;
-      s.style.top = `${Math.random() * 100}%`;
-      s.style.animationDelay = `${Math.random() * 6}s`;
-      starsContainer.appendChild(s);
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.animationDelay = `${Math.random() * 6}s`;
+      starsContainer.appendChild(star);
       stars.push({
-        el: s, x: parseFloat(s.style.left), y: parseFloat(s.style.top),
-        dx: (Math.random() - 0.5) * 0.02, dy: (Math.random() - 0.5) * 0.02
+        el: star,
+        x: parseFloat(star.style.left),
+        y: parseFloat(star.style.top),
+        dx: (Math.random() - 0.5) * 0.02,
+        dy: (Math.random() - 0.5) * 0.02,
       });
     }
+
     function animateStars() {
       stars.forEach(s => {
-        s.x += s.dx; s.y += s.dy;
-        if (s.x < 0) s.x = 100; if (s.x > 100) s.x = 0;
-        if (s.y < 0) s.y = 100; if (s.y > 100) s.y = 0;
-        s.el.style.left = `${s.x}%`; s.el.style.top = `${s.y}%`;
+        s.x += s.dx;
+        s.y += s.dy;
+        if (s.x < 0) s.x = 100;
+        if (s.x > 100) s.x = 0;
+        if (s.y < 0) s.y = 100;
+        if (s.y > 100) s.y = 0;
+        s.el.style.left = `${s.x}%`;
+        s.el.style.top = `${s.y}%`;
       });
       requestAnimationFrame(animateStars);
     }
     animateStars();
 
-    // Splash fade-out timings
-    window.addEventListener('load', () => {
-      setTimeout(() => document.getElementById('splash-screen').classList.add('fade-out'), 2500);
-      setTimeout(() => { document.getElementById('splash-screen').style.display = 'none'; }, 4000);
+    // ---- Splash fade-out timing ----
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("splash-screen").classList.add("fade-out");
+      }, 2500); // how long splash stays visible
+      setTimeout(() => {
+        document.getElementById("splash-screen").style.display = "none";
+      }, 4000); // how long before it fully disappears
     });
   </script>
 </body>
