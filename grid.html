@@ -1,74 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Case File - The Christmas Complaint</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
-  <!-- Shared CSS -->
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case File - The Advent Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <!-- Sidebar Navigation -->
-  <nav class="sidebar">
-  <div class="logo">🎄 Advent Game</div>
-  <ul>
-    <li><a href="index.html">🏠 Calendar</a></li>
-    <li><a href="grid.html" class="active">🕵️ Case File</a></li>
-    <li><a href="story.html">📜 Story</a></li>
-    <li><a href="help.html">❓ Help</a></li>
-  </ul>
-</nav>
+  <div class="stars-container"></div>
 
+  <header class="navbar">
+    <div class="logo">The Advent Game</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="grid.html" class="active">Case File</a></li>
+        <li><a href="story.html">Story</a></li>
+        <li><a href="help.html">Help</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <!-- Main Content -->
-  <main>
-    <h1>The Christmas Complaint Case File</h1>
-    <p>Each solved clue eliminates a suspect, gift, or location. Your goal: find who complained, what gift they received, and where they are!</p>
+  <main class="page-content">
+    <h1>🕵️ Your Case File</h1>
+    <p>Track your discoveries here. Each correct answer will automatically cross out suspects, gifts, and locations.</p>
 
-    <div class="grid-section">
-      <h2>🎅 Suspects</h2>
-      <table id="suspects">
-        <tr><td data-name="Clara Claus">Clara Claus</td><td data-name="Frosty McSnow">Frosty McSnow</td><td data-name="Holly Berry">Holly Berry</td></tr>
-        <tr><td data-name="Chris Pine">Chris Pine</td><td data-name="Rudy Deer">Rudy Deer</td><td data-name="Eve Star">Eve Star</td></tr>
-        <tr><td data-name="Tinsel Twigg">Tinsel Twigg</td><td data-name="Noel Frost">Noel Frost</td><td data-name="Ivy Spark">Ivy Spark</td></tr>
-      </table>
-
-      <h2>🎁 Gifts</h2>
-      <table id="gifts">
-        <tr><td data-name="Socks">Socks</td><td data-name="Drone">Drone</td><td data-name="Book">Book</td></tr>
-        <tr><td data-name="Candle">Candle</td><td data-name="Sweater">Sweater</td><td data-name="Board Game">Board Game</td></tr>
-        <tr><td data-name="Chocolates">Chocolates</td><td data-name="Toy Train">Toy Train</td><td data-name="Slippers">Slippers</td></tr>
-      </table>
-
-      <h2>🌍 Locations</h2>
-      <table id="places">
-        <tr><td data-name="Lapland">Lapland</td><td data-name="Sydney">Sydney</td><td data-name="New York">New York</td></tr>
-        <tr><td data-name="Tokyo">Tokyo</td><td data-name="London">London</td><td data-name="Rio">Rio</td></tr>
-        <tr><td data-name="Paris">Paris</td><td data-name="Cape Town">Cape Town</td><td data-name="Toronto">Toronto</td></tr>
-      </table>
-    </div>
+    <table>
+      <thead>
+        <tr><th>Suspects</th><th>Gifts</th><th>Locations</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Elf Sprinkles</td><td>Drone</td><td>Lapland</td></tr>
+        <tr><td>Mrs. Claus</td><td>Sweater</td><td>Greenland</td></tr>
+        <tr><td>Rudolph</td><td>Chocolate</td><td>North Pole</td></tr>
+      </tbody>
+    </table>
   </main>
 
-  <footer>
-    <p>© 2025 The Advent Game — Case Progress</p>
-  </footer>
+  <footer>© 2025 The Advent Game — All Rights Reserved</footer>
 
   <script>
-    // Load progress from localStorage and mark crossed-out items
-    window.addEventListener('load', () => {
-      const progress = JSON.parse(localStorage.getItem('progress')) || {};
-      for (let category in progress) {
-        progress[category].forEach(item => {
-          const cell = document.querySelector(`[data-name="${item}"]`);
-          if (cell) cell.classList.add('crossed');
-        });
-      }
-    });
+    const starsContainer = document.querySelector('.stars-container');
+    const starCount = 60;
+    const stars = [];
+    for (let i = 0; i < starCount; i++) {
+      const s = document.createElement('div');
+      s.classList.add('star');
+      const size = Math.random() * 4 + 2;
+      s.style.width = `${size}px`;
+      s.style.height = `${size}px`;
+      s.style.left = `${Math.random() * 100}%`;
+      s.style.top = `${Math.random() * 100}%`;
+      s.style.animationDelay = `${Math.random() * 6}s`;
+      starsContainer.appendChild(s);
+      stars.push({ el: s, x: parseFloat(s.style.left), y: parseFloat(s.style.top), dx: (Math.random() - 0.5) * 0.02, dy: (Math.random() - 0.5) * 0.02 });
+    }
+    function animateStars() {
+      stars.forEach(s => {
+        s.x += s.dx; s.y += s.dy;
+        if (s.x < 0) s.x = 100; if (s.x > 100) s.x = 0;
+        if (s.y < 0) s.y = 100; if (s.y > 100) s.y = 0;
+        s.el.style.left = `${s.x}%`; s.el.style.top = `${s.y}%`;
+      });
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
   </script>
 </body>
 </html>
