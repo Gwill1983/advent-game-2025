@@ -4,11 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Advent Game</title>
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <!-- Soft golden stars background -->
   <div class="stars-container"></div>
+
   <!-- Navigation Bar -->
   <header class="navbar">
     <div class="logo">The Advent Game</div>
@@ -32,7 +37,6 @@
   <!-- Advent Calendar Grid -->
   <section class="calendar">
     <div class="calendar-grid">
-      <!-- Generate 24 boxes -->
       <script>
         for (let i = 1; i <= 24; i++) {
           document.write(`<div class="day-box"><span>${i}</span></div>`);
@@ -42,11 +46,9 @@
   </section>
 
   <footer>© 2025 The Advent Game — All Rights Reserved</footer>
-    <footer>© 2025 The Advent Game — All Rights Reserved</footer>
 
   <!-- Starfield Script -->
   <script>
-    // Create a soft golden twinkle effect
     const starsContainer = document.querySelector('.stars-container');
     const starCount = 60; // adjust number of stars here
 
@@ -61,9 +63,5 @@
       starsContainer.appendChild(star);
     }
   </script>
-
-</body>
-</html>
-
 </body>
 </html>
