@@ -199,18 +199,19 @@ footer {
 
 .splash-text {
   text-align: center;
-  animation: fadeInUp 1.5s ease forwards;
+  animation: fadeInUp 1.4s ease forwards;
 }
 
 .splash-text h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 3rem;
+  font-size: 3.2rem;
   background: linear-gradient(90deg, #f8e6a0, #d4af37);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: 2px;
-  text-shadow: 0 0 20px rgba(255, 255, 200, 0.3);
-  margin-bottom: 10px;
+  text-shadow: 0 0 25px rgba(255, 255, 200, 0.4);
+  margin-bottom: 12px;
+  animation: logoPulse 2.5s ease-in-out infinite alternate;
 }
 
 .splash-text p {
@@ -222,12 +223,24 @@ footer {
 }
 
 .fade-out {
-  opacity: 0;
-  transition: opacity 1.5s ease;
+  animation: fadeOutZoom 1.6s ease forwards;
   pointer-events: none;
 }
 
+/* === Animations === */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+@keyframes logoPulse {
+  0% { text-shadow: 0 0 20px rgba(255,255,200,0.2), 0 0 40px rgba(212,175,55,0.3); }
+  100% { text-shadow: 0 0 40px rgba(255,255,200,0.6), 0 0 80px rgba(212,175,55,0.5); }
+}
+
+@keyframes fadeOutZoom {
+  0% { opacity: 1; transform: scale(1); filter: blur(0); }
+  40% { opacity: 1; transform: scale(1.05); filter: brightness(1.2); }
+  100% { opacity: 0; transform: scale(1.15); filter: blur(15px) brightness(1.8); }
+}
+
