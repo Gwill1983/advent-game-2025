@@ -99,24 +99,32 @@
     }
     animateStars();
 
-/* ===== FADE-OUT SPLASH LOGIC (smooth + reliable) ===== */
-window.addEventListener("load", () => {
+/* ===== SPLASH SCREEN: smooth + only once per session ===== */
+document.addEventListener("DOMContentLoaded", () => {
   const splash = document.getElementById("splash-screen");
   if (!splash) return;
 
-  // Add a little breathing space before fade begins
+  // Check if splash has been shown already this session
+  const seen = sessionStorage.getItem("splashShown");
+  if (seen) {
+    splash.style.display = "none";
+    document.body.style.overflow = "auto";
+    return; // skip entirely
+  }
+
+  // Otherwise, show it once then remember
   setTimeout(() => {
     splash.classList.add("fade-out");
   }, 2000);
 
-  // Remove from view after fade animation completes
+  // When fade finishes, remove splash & mark it as shown
   splash.addEventListener("animationend", () => {
-    if (splash.classList.contains("fade-out")) {
-      splash.style.display = "none";
-      document.body.style.overflow = "auto";
-    }
+    splash.style.display = "none";
+    document.body.style.overflow = "auto";
+    sessionStorage.setItem("splashShown", "true");
   });
 });
+
 
 
 
