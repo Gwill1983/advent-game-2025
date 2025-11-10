@@ -52,89 +52,115 @@
       </script>
     </div>
   </section>
+  
+<!-- ✨ Daily Reveal Modal -->
+<div id="dayModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <div id="modal-inner"></div>
+    <audio id="doorSound" preload="auto"></audio>
+  </div>
+</div>
 
   <footer>© 2025 The Advent Game — All Rights Reserved</footer>
 
   <!-- Starfield + Splash Script -->
   <script>
-    // ---- Golden Starfield ----
-    const starsContainer = document.querySelector('.stars-container');
-    const starCount = 60;
-    const stars = [];
-
-    for (let i = 0; i < starCount; i++) {
-      const star = document.createElement('div');
-      star.classList.add('star');
-      const size = Math.random() * 4 + 2;
-      star.style.width = `${size}px`;
-      star.style.height = `${size}px`;
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.top = `${Math.random() * 100}%`;
-      star.style.animationDelay = `${Math.random() * 6}s`;
-      starsContainer.appendChild(star);
-      stars.push({
-        el: star,
-        x: parseFloat(star.style.left),
-        y: parseFloat(star.style.top),
-        dx: (Math.random() - 0.5) * 0.02,
-        dy: (Math.random() - 0.5) * 0.02,
-      });
-    }
-
-    function animateStars() {
-      stars.forEach(s => {
-        s.x += s.dx;
-        s.y += s.dy;
-        if (s.x < 0) s.x = 100;
-        if (s.x > 100) s.x = 0;
-        if (s.y < 0) s.y = 100;
-        if (s.y > 100) s.y = 0;
-        s.el.style.left = `${s.x}%`;
-        s.el.style.top = `${s.y}%`;
-      });
-      requestAnimationFrame(animateStars);
-    }
-    animateStars();
-
-    // ---- Stars inside splash screen ----
-    const splash = document.getElementById('splash-screen');
-    if (splash) {
-      for (let i = 0; i < 40; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.top = `${Math.random() * 100}%`;
-        star.style.animationDelay = `${Math.random() * 5}s`;
-        splash.appendChild(star);
-      }
-    }
-
-    // ---- Splash logic ----
-    document.addEventListener("DOMContentLoaded", () => {
-      const splashElement = document.getElementById("splash-screen");
-      const hasSeenSplash = sessionStorage.getItem("splashShown");
-
-      // If splash has already been shown this session, skip it
-      if (hasSeenSplash && splashElement) {
-        splashElement.style.display = "none";
-        document.body.style.overflow = "auto";
-        return;
-      }
-
-      // Otherwise show splash once per session
-      if (splashElement) {
-        setTimeout(() => {
-          splashElement.classList.add("fade-out");
-          setTimeout(() => {
-            splashElement.style.display = "none";
-            document.body.style.overflow = "auto";
-          }, 1600); // fade-out duration
-        }, 2000); // how long splash stays visible before fading
-      }
-
-      // Mark splash as shown for this session
-      sessionStorage.setItem("splashShown", "true");
+  // 🌟 Starfield (unchanged)
+  const starsContainer = document.querySelector('.stars-container');
+  const starCount = 60;
+  const stars = [];
+  for (let i = 0; i < starCount; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    const size = Math.random() * 4 + 2;
+    star.style.width = `${size}px`;
+    star.style.height = `${size}px`;
+    star.style.left = `${Math.random() * 100}%`;
+    star.style.top = `${Math.random() * 100}%`;
+    star.style.animationDelay = `${Math.random() * 6}s`;
+    starsContainer.appendChild(star);
+    stars.push({
+      el: star,
+      x: parseFloat(star.style.left),
+      y: parseFloat(star.style.top),
+      dx: (Math.random() - 0.5) * 0.02,
+      dy: (Math.random() - 0.5) * 0.02,
     });
-  </script>
+  }
+  function animateStars() {
+    stars.forEach(s => {
+      s.x += s.dx;
+      s.y += s.dy;
+      if (s.x < 0) s.x = 100;
+      if (s.x > 100) s.x = 0;
+      if (s.y < 0) s.y = 100;
+      if (s.y > 100) s.y = 0;
+      s.el.style.left = `${s.x}%`;
+      s.el.style.top = `${s.y}%`;
+    });
+    requestAnimationFrame(animateStars);
+  }
+  animateStars();
+
+  // 🎬 Splash logic (same as before)
+  document.addEventListener("DOMContentLoaded", () => {
+    const splash = document.getElementById("splash-screen");
+    const hasSeenSplash = sessionStorage.getItem("splashShown");
+    if (hasSeenSplash && splash) {
+      splash.style.display = "none";
+      document.body.style.overflow = "auto";
+      return;
+    }
+    if (splash) {
+      setTimeout(() => {
+        splash.classList.add("fade-out");
+        setTimeout(() => {
+          splash.style.display = "none";
+          document.body.style.overflow = "auto";
+        }, 1600);
+      }, 2000);
+    }
+    sessionStorage.setItem("splashShown", "true");
+  });
+
+  // 🎁 Advent Reveal Logic
+  const calendarGrid = document.querySelector('.calendar-grid');
+  const modal = document.getElementById('dayModal');
+  const modalInner = document.getElementById('modal-inner');
+  const closeBtn = document.querySelector('.close-btn');
+  const doorSound = document.getElementById('doorSound');
+
+  // Example standalone content — replace or expand later
+  const dailyContent = {
+    1: { text: "🎄 Day 1: Welcome to your month of festive surprises!", audio: "audio/jingle1.mp3" },
+    2: { text: "😂 Why did the ornament go to school? To get a little brighter!", audio: "audio/bells.mp3" },
+    3: { text: "☕ Take 2 minutes today to enjoy something warm and cozy.", audio: "audio/unwrap.mp3" },
+    4: { text: "🎶 Guess the carol from this lyric: 'Silent night...'", audio: "audio/chime.mp3" },
+  };
+
+  for (let i = 1; i <= 24; i++) {
+    const box = document.createElement('div');
+    box.className = 'day-box';
+    box.innerHTML = `<span>${i}</span>`;
+    box.addEventListener('click', () => openDay(i));
+    calendarGrid.appendChild(box);
+  }
+
+  function openDay(day) {
+    const content = dailyContent[day] || { text: "✨ A surprise awaits!", audio: "audio/default.mp3" };
+    modalInner.innerHTML = content.text;
+    doorSound.src = content.audio;
+    doorSound.play();
+    modal.classList.remove('hidden');
+  }
+
+  closeBtn.addEventListener('click', () => {
+    modal.classList.add('hidden');
+    doorSound.pause();
+    doorSound.currentTime = 0;
+  });
+</script>
+
 </body>
 </html>
