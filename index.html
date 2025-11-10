@@ -59,184 +59,178 @@
 
   <!-- Scripts -->
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-
-    /* ===== STARFIELD ===== */
-    const starsContainer = document.querySelector('.stars-container');
-    const starCount = 60;
-    const stars = [];
-    for (let i = 0; i < starCount; i++) {
-      const star = document.createElement('div');
-      star.classList.add('star');
-      const size = Math.random() * 4 + 2;
-      star.style.width = `${size}px`;
-      star.style.height = `${size}px`;
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.top = `${Math.random() * 100}%`;
-      star.style.animationDelay = `${Math.random() * 6}s`;
-      starsContainer.appendChild(star);
-      stars.push({
-        el: star,
-        x: parseFloat(star.style.left),
-        y: parseFloat(star.style.top),
-        dx: (Math.random() - 0.5) * 0.02,
-        dy: (Math.random() - 0.5) * 0.02,
-      });
-    }
-
-    function animateStars() {
-      stars.forEach(s => {
-        s.x += s.dx;
-        s.y += s.dy;
-        if (s.x < 0) s.x = 100;
-        if (s.x > 100) s.x = 0;
-        if (s.y < 0) s.y = 100;
-        if (s.y > 100) s.y = 0;
-        s.el.style.left = `${s.x}%`;
-        s.el.style.top = `${s.y}%`;
-      });
-      requestAnimationFrame(animateStars);
-    }
-    animateStars();
-
-/* ===== SPLASH SCREEN: smooth + only once per session ===== */
 document.addEventListener("DOMContentLoaded", () => {
+
+  /* ===== STARFIELD ===== */
+  const starsContainer = document.querySelector('.stars-container');
+  const starCount = 60;
+  const stars = [];
+  for (let i = 0; i < starCount; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    const size = Math.random() * 4 + 2;
+    star.style.width = `${size}px`;
+    star.style.height = `${size}px`;
+    star.style.left = `${Math.random() * 100}%`;
+    star.style.top = `${Math.random() * 100}%`;
+    star.style.animationDelay = `${Math.random() * 6}s`;
+    starsContainer.appendChild(star);
+    stars.push({
+      el: star,
+      x: parseFloat(star.style.left),
+      y: parseFloat(star.style.top),
+      dx: (Math.random() - 0.5) * 0.02,
+      dy: (Math.random() - 0.5) * 0.02,
+    });
+  }
+
+  function animateStars() {
+    stars.forEach(s => {
+      s.x += s.dx;
+      s.y += s.dy;
+      if (s.x < 0) s.x = 100;
+      if (s.x > 100) s.x = 0;
+      if (s.y < 0) s.y = 100;
+      if (s.y > 100) s.y = 0;
+      s.el.style.left = `${s.x}%`;
+      s.el.style.top = `${s.y}%`;
+    });
+    requestAnimationFrame(animateStars);
+  }
+  animateStars();
+
+
+  /* ===== SPLASH SCREEN: smooth + only once per session ===== */
   const splash = document.getElementById("splash-screen");
-  if (!splash) return;
+  if (splash) {
+    const seen = sessionStorage.getItem("splashShown");
 
-  // Check if splash has been shown already this session
-  const seen = sessionStorage.getItem("splashShown");
-  if (seen) {
-    splash.style.display = "none";
-    document.body.style.overflow = "auto";
-    return; // skip entirely
+    if (seen) {
+      splash.style.display = "none";
+      document.body.style.overflow = "auto";
+    } else {
+      setTimeout(() => {
+        splash.classList.add("fade-out");
+      }, 2000);
+
+      splash.addEventListener("animationend", () => {
+        splash.classList.add("hidden");
+        document.body.style.overflow = "auto";
+        sessionStorage.setItem("splashShown", "true");
+      });
+    }
   }
 
-  // Otherwise, show it once then remember
-  setTimeout(() => {
-    splash.classList.add("fade-out");
-  }, 2000);
 
-  // When fade finishes, remove splash & mark it as shown
-  splash.addEventListener("animationend", () => {
-  splash.classList.add("hidden");
-  document.body.style.overflow = "auto";
-  sessionStorage.setItem("splashShown", "true");
-});
+  /* ===== DAILY REVEAL LOGIC ===== */
+  const calendarGrid = document.querySelector('.calendar-grid');
+  const modal = document.getElementById('dayModal');
+  const modalInner = document.getElementById('modal-inner');
+  const closeBtn = document.querySelector('.modal .close-btn');
 
+  const dailyContent = {
+    1: {
+      text: `
+        <div class="newspaper-header">
+          <h2>THE NORTH POLE TIMES</h2>
+        </div>
+        <p class="newspaper-subtitle">December 1 — Breaking News from Santa’s Workshop</p>
+        <img src="images/day1-toyshortage.jpg" alt="Workshop chaos" class="newspaper-image">
+        <div class="newspaper-body">
+          <p><strong>TOY SHORTAGE SPARKS PANIC!</strong></p>
+          <p>Elves discovered half-finished toys piled high with tags torn off. 
+             Santa’s Logistics Chief suspects mischief in the wrapping room.</p>
+          <p><em>Puzzle:</em> “T L O Y N O M D O S” — Unscramble the letters to reveal who might be behind the mess.</p>
+          <p><em>Hint:</em> The culprit loves play-dough.</p>
+        </div>
+      `
+    },
+    2: {
+      text: `
+        <div class="newspaper-header">
+          <h2>THE NORTH POLE TIMES</h2>
+        </div>
+        <p class="newspaper-subtitle">December 2 — A Frosty Discovery</p>
+        <img src="images/day2-icecrime.jpg" alt="Frozen scene" class="newspaper-image">
+        <div class="newspaper-body">
+          <p><strong>RUDOLPH’S NOSE FOUND FROZEN!</strong></p>
+          <p>Investigators uncovered a glowing red light encased in ice near the stables. 
+             A chilling clue, quite literally.</p>
+          <p><em>Riddle:</em> “The colder I get, the clearer I become. What am I?”</p>
+        </div>
+      `
+    },
+    3: {
+      text: `
+        <div class="newspaper-header">
+          <h2>THE NORTH POLE TIMES</h2>
+        </div>
+        <p class="newspaper-subtitle">December 3 — Exclusive Interview</p>
+        <img src="images/day3-elfinterview.jpg" alt="Interviewing elves" class="newspaper-image">
+        <div class="newspaper-body">
+          <p><strong>HEAD ELF SPEAKS OUT!</strong></p>
+          <p>“We’ve been working around the clock,” says Tinsel Twig. 
+             “But something keeps resetting our toy counters overnight!”</p>
+          <p><em>Puzzle:</em> Find the hidden word:  
+             <br>“SANTASWORKSHOP” – Remove every second letter. What remains?</p>
+        </div>
+      `
+    },
+    4: {
+      text: `
+        <div class="newspaper-header">
+          <h2>THE NORTH POLE TIMES</h2>
+        </div>
+        <p class="newspaper-subtitle">December 4 — Mystery Deepens</p>
+        <img src="images/day4-cookieclue.jpg" alt="Cookie crumbs" class="newspaper-image">
+        <div class="newspaper-body">
+          <p><strong>COOKIE CRUMBS LEAD NOWHERE!</strong></p>
+          <p>Mrs Claus reports an empty cookie jar beside muddy boot prints. 
+             Could this be a frame-up?</p>
+          <p><em>Puzzle:</em> Which three-letter word fits all blanks?  
+             <br>_ O _ ,  _S O _,  _F O _.<br>
+             <em>Hint:</em> You can eat it or build a man from it.</p>
+        </div>
+      `
+    },
+    5: {
+      text: `
+        <div class="newspaper-header">
+          <h2>THE NORTH POLE TIMES</h2>
+        </div>
+        <p class="newspaper-subtitle">December 5 — Breaking: Evidence Found!</p>
+        <img src="images/day5-giftpile.jpg" alt="Gift pile" class="newspaper-image">
+        <div class="newspaper-body">
+          <p><strong>STRANGE GIFT TAG DISCOVERED</strong></p>
+          <p>Elves sorting presents found one tag reading simply “To: ?”.  
+             The handwriting was suspiciously loopy.</p>
+          <p><em>Code Challenge:</em>  
+             3-8-18-9-19-20-13-1-19 — decode using A = 1 → Z = 26.</p>
+        </div>
+      `
+    }
+  };
 
-
-
-
-
-/* ===== DAILY REVEAL LOGIC ===== */
-const calendarGrid = document.querySelector('.calendar-grid');
-const modal = document.getElementById('dayModal');
-const modalInner = document.getElementById('modal-inner');
-const closeBtn = document.querySelector('.modal .close-btn');
-
-const dailyContent = {
-  1: {
-    text: `
-      <div class="newspaper-header">
-        <h2>THE NORTH POLE TIMES</h2>
-      </div>
-      <p class="newspaper-subtitle">December 1 — Breaking News from Santa’s Workshop</p>
-      <img src="images/day1-toyshortage.jpg" alt="Workshop chaos" class="newspaper-image">
-      <div class="newspaper-body">
-        <p><strong>TOY SHORTAGE SPARKS PANIC!</strong></p>
-        <p>Elves discovered half-finished toys piled high with tags torn off. 
-           Santa’s Logistics Chief suspects mischief in the wrapping room.</p>
-        <p><em>Puzzle:</em> “T L O Y N O M D O S” — Unscramble the letters to reveal who might be behind the mess.</p>
-        <p><em>Hint:</em> The culprit loves play-dough.</p>
-      </div>
-    `
-  },
-  2: {
-    text: `
-      <div class="newspaper-header">
-        <h2>THE NORTH POLE TIMES</h2>
-      </div>
-      <p class="newspaper-subtitle">December 2 — A Frosty Discovery</p>
-      <img src="images/day2-icecrime.jpg" alt="Frozen scene" class="newspaper-image">
-      <div class="newspaper-body">
-        <p><strong>RUDOLPH’S NOSE FOUND FROZEN!</strong></p>
-        <p>Investigators uncovered a glowing red light encased in ice near the stables. 
-           A chilling clue, quite literally.</p>
-        <p><em>Riddle:</em> “The colder I get, the clearer I become. What am I?”</p>
-      </div>
-    `
-  },
-  3: {
-    text: `
-      <div class="newspaper-header">
-        <h2>THE NORTH POLE TIMES</h2>
-      </div>
-      <p class="newspaper-subtitle">December 3 — Exclusive Interview</p>
-      <img src="images/day3-elfinterview.jpg" alt="Interviewing elves" class="newspaper-image">
-      <div class="newspaper-body">
-        <p><strong>HEAD ELF SPEAKS OUT!</strong></p>
-        <p>“We’ve been working around the clock,” says Tinsel Twig. 
-           “But something keeps resetting our toy counters overnight!”</p>
-        <p><em>Puzzle:</em> Find the hidden word:  
-           <br>“SANTASWORKSHOP” – Remove every second letter. What remains?</p>
-      </div>
-    `
-  },
-  4: {
-    text: `
-      <div class="newspaper-header">
-        <h2>THE NORTH POLE TIMES</h2>
-      </div>
-      <p class="newspaper-subtitle">December 4 — Mystery Deepens</p>
-      <img src="images/day4-cookieclue.jpg" alt="Cookie crumbs" class="newspaper-image">
-      <div class="newspaper-body">
-        <p><strong>COOKIE CRUMBS LEAD NOWHERE!</strong></p>
-        <p>Mrs Claus reports an empty cookie jar beside muddy boot prints. 
-           Could this be a frame-up?</p>
-        <p><em>Puzzle:</em> Which three-letter word fits all blanks?  
-           <br>_ O _ ,  _S O _,  _F O _.<br>
-           <em>Hint:</em> You can eat it or build a man from it.</p>
-      </div>
-    `
-  },
-  5: {
-    text: `
-      <div class="newspaper-header">
-        <h2>THE NORTH POLE TIMES</h2>
-      </div>
-      <p class="newspaper-subtitle">December 5 — Breaking: Evidence Found!</p>
-      <img src="images/day5-giftpile.jpg" alt="Gift pile" class="newspaper-image">
-      <div class="newspaper-body">
-        <p><strong>STRANGE GIFT TAG DISCOVERED</strong></p>
-        <p>Elves sorting presents found one tag reading simply “To: ?”.  
-           The handwriting was suspiciously loopy.</p>
-        <p><em>Code Challenge:</em>  
-           3-8-18-9-19-20-13-1-19 — decode using A = 1 → Z = 26.</p>
-      </div>
-    `
+  // Build calendar grid
+  for (let i = 1; i <= 24; i++) {
+    const box = document.createElement('div');
+    box.className = 'day-box';
+    box.innerHTML = `<span>${i}</span>`;
+    box.addEventListener('click', () => openDay(i));
+    calendarGrid.appendChild(box);
   }
-};
 
-// Build grid and modal logic stay the same
-for (let i = 1; i <= 24; i++) {
-  const box = document.createElement('div');
-  box.className = 'day-box';
-  box.innerHTML = `<span>${i}</span>`;
-  box.addEventListener('click', () => openDay(i));
-  calendarGrid.appendChild(box);
-}
+  function openDay(day) {
+    const content = dailyContent[day] || { text: "<p>No edition available yet.</p>" };
+    modalInner.innerHTML = content.text;
+    modal.classList.remove('hidden');
+  }
 
-function openDay(day) {
-  const content = dailyContent[day] || { text: "<p>No edition available yet.</p>" };
-  modalInner.innerHTML = content.text;
-  modal.classList.remove('hidden');
-}
+  closeBtn.addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
 
-closeBtn.addEventListener('click', () => {
-  modal.classList.add('hidden');
 });
-}); // ← closes document.addEventListener("DOMContentLoaded", ...)
 </script>
 
 </body>
