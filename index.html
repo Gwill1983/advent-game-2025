@@ -116,40 +116,114 @@
       sessionStorage.setItem("splashShown", "true");
     }
 
-    /* ===== DAILY REVEAL LOGIC ===== */
-    const calendarGrid = document.querySelector('.calendar-grid');
-    const modal = document.getElementById('dayModal');
-    const modalInner = document.getElementById('modal-inner');
-    const closeBtn = document.querySelector('.modal .close-btn');
-    const doorSound = document.getElementById('doorSound');
+/* ===== DAILY REVEAL LOGIC ===== */
+const calendarGrid = document.querySelector('.calendar-grid');
+const modal = document.getElementById('dayModal');
+const modalInner = document.getElementById('modal-inner');
+const closeBtn = document.querySelector('.modal .close-btn');
 
-    const dailyContent = {
-      1: { text: "🎄 Day 1: Welcome to your month of festive surprises!" },
-      2: { text: "😂 Why did the ornament go to school? To get a little brighter!" },
-      3: { text: "☕ Take 2 minutes today to enjoy something warm and cozy." },
-      4: { text: "🎶 Guess the carol from this lyric: 'Silent night...'" },
-    };
+const dailyContent = {
+  1: {
+    text: `
+      <div class="newspaper-header">
+        <h2>THE NORTH POLE TIMES</h2>
+      </div>
+      <p class="newspaper-subtitle">December 1 — Breaking News from Santa’s Workshop</p>
+      <img src="images/day1-toyshortage.jpg" alt="Workshop chaos" class="newspaper-image">
+      <div class="newspaper-body">
+        <p><strong>TOY SHORTAGE SPARKS PANIC!</strong></p>
+        <p>Elves discovered half-finished toys piled high with tags torn off. 
+           Santa’s Logistics Chief suspects mischief in the wrapping room.</p>
+        <p><em>Puzzle:</em> “T L O Y N O M D O S” — Unscramble the letters to reveal who might be behind the mess.</p>
+        <p><em>Hint:</em> The culprit loves play-dough.</p>
+      </div>
+    `
+  },
+  2: {
+    text: `
+      <div class="newspaper-header">
+        <h2>THE NORTH POLE TIMES</h2>
+      </div>
+      <p class="newspaper-subtitle">December 2 — A Frosty Discovery</p>
+      <img src="images/day2-icecrime.jpg" alt="Frozen scene" class="newspaper-image">
+      <div class="newspaper-body">
+        <p><strong>RUDOLPH’S NOSE FOUND FROZEN!</strong></p>
+        <p>Investigators uncovered a glowing red light encased in ice near the stables. 
+           A chilling clue, quite literally.</p>
+        <p><em>Riddle:</em> “The colder I get, the clearer I become. What am I?”</p>
+      </div>
+    `
+  },
+  3: {
+    text: `
+      <div class="newspaper-header">
+        <h2>THE NORTH POLE TIMES</h2>
+      </div>
+      <p class="newspaper-subtitle">December 3 — Exclusive Interview</p>
+      <img src="images/day3-elfinterview.jpg" alt="Interviewing elves" class="newspaper-image">
+      <div class="newspaper-body">
+        <p><strong>HEAD ELF SPEAKS OUT!</strong></p>
+        <p>“We’ve been working around the clock,” says Tinsel Twig. 
+           “But something keeps resetting our toy counters overnight!”</p>
+        <p><em>Puzzle:</em> Find the hidden word:  
+           <br>“SANTASWORKSHOP” – Remove every second letter. What remains?</p>
+      </div>
+    `
+  },
+  4: {
+    text: `
+      <div class="newspaper-header">
+        <h2>THE NORTH POLE TIMES</h2>
+      </div>
+      <p class="newspaper-subtitle">December 4 — Mystery Deepens</p>
+      <img src="images/day4-cookieclue.jpg" alt="Cookie crumbs" class="newspaper-image">
+      <div class="newspaper-body">
+        <p><strong>COOKIE CRUMBS LEAD NOWHERE!</strong></p>
+        <p>Mrs Claus reports an empty cookie jar beside muddy boot prints. 
+           Could this be a frame-up?</p>
+        <p><em>Puzzle:</em> Which three-letter word fits all blanks?  
+           <br>_ O _ ,  _S O _,  _F O _.<br>
+           <em>Hint:</em> You can eat it or build a man from it.</p>
+      </div>
+    `
+  },
+  5: {
+    text: `
+      <div class="newspaper-header">
+        <h2>THE NORTH POLE TIMES</h2>
+      </div>
+      <p class="newspaper-subtitle">December 5 — Breaking: Evidence Found!</p>
+      <img src="images/day5-giftpile.jpg" alt="Gift pile" class="newspaper-image">
+      <div class="newspaper-body">
+        <p><strong>STRANGE GIFT TAG DISCOVERED</strong></p>
+        <p>Elves sorting presents found one tag reading simply “To: ?”.  
+           The handwriting was suspiciously loopy.</p>
+        <p><em>Code Challenge:</em>  
+           3-8-18-9-19-20-13-1-19 — decode using A = 1 → Z = 26.</p>
+      </div>
+    `
+  }
+};
 
-    // Build 24 boxes dynamically
-    for (let i = 1; i <= 24; i++) {
-      const box = document.createElement('div');
-      box.className = 'day-box';
-      box.innerHTML = `<span>${i}</span>`;
-      box.addEventListener('click', () => openDay(i));
-      calendarGrid.appendChild(box);
-    }
+// Build grid and modal logic stay the same
+for (let i = 1; i <= 24; i++) {
+  const box = document.createElement('div');
+  box.className = 'day-box';
+  box.innerHTML = `<span>${i}</span>`;
+  box.addEventListener('click', () => openDay(i));
+  calendarGrid.appendChild(box);
+}
 
-    function openDay(day) {
-      const content = dailyContent[day] || { text: "✨ A surprise awaits soon!" };
-      modalInner.innerHTML = `<p>${content.text}</p>`;
-      modal.classList.remove('hidden');
-    }
+function openDay(day) {
+  const content = dailyContent[day] || { text: "<p>No edition available yet.</p>" };
+  modalInner.innerHTML = content.text;
+  modal.classList.remove('hidden');
+}
 
-    closeBtn.addEventListener('click', () => {
-      modal.classList.add('hidden');
-    });
+closeBtn.addEventListener('click', () => {
+  modal.classList.add('hidden');
+});
 
-  });
   </script>
 
 </body>
