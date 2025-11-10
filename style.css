@@ -275,15 +275,18 @@ footer {
 #splash-screen.fade-out {
   animation: simpleFadeOut 1.6s ease forwards;
   pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
+}
+
+#splash-screen.hidden {
   display: none;
+  visibility: hidden;
 }
 
 @keyframes simpleFadeOut {
   from { opacity: 1; }
   to { opacity: 0; }
 }
+
 
 .splash-text {
   text-align: center;
