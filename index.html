@@ -99,19 +99,23 @@
     }
     animateStars();
 
-/* ===== SIMPLIFIED SPLASH LOGIC ===== */
-const splash = document.getElementById("splash-screen");
+/* ===== FIXED SPLASH LOGIC ===== */
+window.addEventListener("load", () => {
+  const splash = document.getElementById("splash-screen");
+  if (!splash) return;
 
-// Always fade out after 2 seconds
-if (splash) {
+  // Wait 2 seconds, then fade out
   setTimeout(() => {
     splash.classList.add("fade-out");
+
+    // Ensure it's removed completely after fade
     setTimeout(() => {
       splash.style.display = "none";
       document.body.style.overflow = "auto";
-    }, 1600);
+    }, 1800);
   }, 2000);
-}
+});
+
 
 
 /* ===== DAILY REVEAL LOGIC ===== */
