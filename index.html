@@ -119,11 +119,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // When fade finishes, remove splash & mark it as shown
   splash.addEventListener("animationend", () => {
-    splash.style.display = "none";
-    document.body.style.overflow = "auto";
-    sessionStorage.setItem("splashShown", "true");
-  });
+  splash.classList.add("hidden");
+  document.body.style.overflow = "auto";
+  sessionStorage.setItem("splashShown", "true");
 });
+
 
 
 
