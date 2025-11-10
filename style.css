@@ -273,20 +273,9 @@ footer {
 /* ✨ Splash fade + animation fixes ✨ */
 /* Ensures splash disappears fully after fade */
 #splash-screen.fade-out {
-  animation: simpleFadeOut 1.6s ease forwards;
+  animation: simpleFadeOut 2.5s ease forwards;
   pointer-events: none;
 }
-
-#splash-screen.hidden {
-  display: none;
-  visibility: hidden;
-}
-
-@keyframes simpleFadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
-}
-
 
 .splash-text {
   text-align: center;
