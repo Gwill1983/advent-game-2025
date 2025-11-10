@@ -99,23 +99,25 @@
     }
     animateStars();
 
-/* ===== FIXED SPLASH LOGIC ===== */
+/* ===== FADE-OUT SPLASH LOGIC (smooth + reliable) ===== */
 window.addEventListener("load", () => {
-  console.log("✅ Splash script is running");
   const splash = document.getElementById("splash-screen");
   if (!splash) return;
 
-  // Wait 2 seconds, then fade out
+  // Add a little breathing space before fade begins
   setTimeout(() => {
     splash.classList.add("fade-out");
+  }, 2000);
 
-    // Ensure it's removed completely after fade
-    setTimeout(() => {
+  // Remove from view after fade animation completes
+  splash.addEventListener("animationend", () => {
+    if (splash.classList.contains("fade-out")) {
       splash.style.display = "none";
       document.body.style.overflow = "auto";
-    }, 1800);
-  }, 2000);
+    }
+  });
 });
+
 
 
 
