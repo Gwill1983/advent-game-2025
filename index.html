@@ -99,22 +99,25 @@
     }
     animateStars();
 
-    /* ===== SPLASH LOGIC ===== */
-    const splash = document.getElementById("splash-screen");
-    const hasSeenSplash = sessionStorage.getItem("splashShown");
-    if (hasSeenSplash && splash) {
+/* ===== SPLASH LOGIC ===== */
+const splash = document.getElementById("splash-screen");
+
+if (!sessionStorage.getItem("splashShown")) {
+  // Show once per session, fade out
+  setTimeout(() => {
+    splash.classList.add("fade-out");
+    setTimeout(() => {
       splash.style.display = "none";
       document.body.style.overflow = "auto";
-    } else if (splash) {
-      setTimeout(() => {
-        splash.classList.add("fade-out");
-        setTimeout(() => {
-          splash.style.display = "none";
-          document.body.style.overflow = "auto";
-        }, 1600);
-      }, 2000);
-      sessionStorage.setItem("splashShown", "true");
-    }
+    }, 1600);
+  }, 2000);
+  sessionStorage.setItem("splashShown", "true");
+} else {
+  // Skip splash if already seen
+  splash.style.display = "none";
+  document.body.style.overflow = "auto";
+}
+
 
 /* ===== DAILY REVEAL LOGIC ===== */
 const calendarGrid = document.querySelector('.calendar-grid');
